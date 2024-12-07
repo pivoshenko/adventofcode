@@ -45,7 +45,7 @@ pytest-sugar = ">=1.0.0"
 coverage = { version = ">=7.6.8", extras = ["toml"] }
 
 [tool.commitizen]
-allowed_prefixes = []
+allowed_prefixes = [ "Merge", "Initial"]
 
 [tool.isort]
 profile = "black"
@@ -70,6 +70,7 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["ALL"]
+ignore = ["INP001", "T201"]
 
 [tool.ruff.lint.per-file-ignores]
 
@@ -78,9 +79,9 @@ required-imports = ["from __future__ import annotations"]
 
 [tool.codespell]
 skip = ["poetry.lock"]
-ignore-words-list = []
 
 [tool.deptry.per_rule_ignores]
+
 
 [tool.pytest.ini_options]
 testpaths = ["."]
@@ -94,22 +95,28 @@ poetry_command = ""
 
 [tool.poe.tasks.format]
 help = "Run formatters"
-args = { dir = { options = ["--directory", "-d"], default = ".", help = "Target directory" } }
+args = { dir = { options = [
+  "--directory",
+  "-d",
+], default = ".", help = "Target directory" } }
 sequence = [
   { shell = "find src -type f -name '*.py' | xargs pyupgrade --py312-plus", help = "Run annotations formatter" },
   { shell = "isort ${dir}", help = "Run imports formatter" },
-  { shell = "ruff format ${dir}", help = "Run code formatter" }
+  { shell = "ruff format ${dir}", help = "Run code formatter" },
 ]
 
 [tool.poe.tasks.lint]
 help = "Run linters"
-args = { dir = { options = ["--directory", "-d"], default = ".", help = "Target directory" } }
+args = { dir = { options = [
+  "--directory",
+  "-d",
+], default = ".", help = "Target directory" } }
 sequence = [
   { shell = "deptry ${dir}", help = "Run dependencies linter" },
   { shell = "mypy ${dir}", help = "Run types linter" },
   { shell = "ruff check ${dir}", help = "Run code linter" },
   { shell = "codespell ${dir}", help = "Run spell linter" },
-  { shell = "cz check --rev-range .", help = "Run commits linter" }
+  { shell = "cz check --rev-range .", help = "Run commits linter" },
 ]
 
 [build-system]
