@@ -8,7 +8,7 @@ from __future__ import annotations
 from pathlib import Path
 
 
-def run() -> None:  # noqa: D103
+def run() -> None:
     path_to_input_data = Path(__file__).parent / "input.txt"
 
     with path_to_input_data.open("r") as file:

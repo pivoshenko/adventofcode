@@ -10,7 +10,7 @@ import itertools
 from pathlib import Path
 
 
-def check(report: list[int]) -> bool:  # noqa: D103
+def check(report: list[int]) -> bool:
     diffs = [el_1 - el_2 for el_1, el_2 in itertools.pairwise(report)]
     max_diff = max(abs(diff) for diff in diffs)
 
@@ -20,7 +20,7 @@ def check(report: list[int]) -> bool:  # noqa: D103
     return max_diff <= 3 and (is_trend_increasing or is_trend_decreasing)  # noqa: PLR2004
 
 
-def run() -> None:  # noqa: D103
+def run() -> None:
     path_to_input_data = Path(__file__).parent / "input.txt"
 
     with path_to_input_data.open("r") as file:
