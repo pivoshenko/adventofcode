@@ -26,7 +26,7 @@ def run() -> None:
     with path_to_input_data.open("r") as file:
         input_data = file.read().splitlines()
 
-    reports = [[int(element) for element in line.split()] for line in input_data]
+    reports = [[int(el) for el in line.split()] for line in input_data]
 
     # part 1
     safe_reports = []

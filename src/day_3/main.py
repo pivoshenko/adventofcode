@@ -21,19 +21,18 @@ def run() -> None:
     instructions = re.findall(instruction_pattern, input_data)
 
     numbers_pattern = r"\d+"
-    answer = 0
+    part_1_answer = 0
     for instruction in instructions:
         left, right = re.findall(numbers_pattern, instruction)
-        answer += int(left) * int(right)
+        part_1_answer += int(left) * int(right)
 
-    print(answer)
+    print(part_1_answer)
 
     # part 2
     new_instruction_pattern = r"mul\(\d+,\s*\d+\)|don't|do"
     new_instructions = re.findall(new_instruction_pattern, input_data)
 
-    numbers_pattern = r"\d+"
-    answer = 0
+    part_2_answer = 0
     is_do = True
     for instruction in new_instructions:
         if instruction == "don't":
@@ -46,9 +45,9 @@ def run() -> None:
 
         if is_do:
             left, right = re.findall(numbers_pattern, instruction)
-            answer += int(left) * int(right)
+            part_2_answer += int(left) * int(right)
 
-    print(answer)
+    print(part_2_answer)
 
 
 if __name__ == "__main__":
