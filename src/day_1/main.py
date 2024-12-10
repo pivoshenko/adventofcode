@@ -14,9 +14,9 @@ def run() -> None:
     with path_to_input_data.open("r") as file:
         input_data = file.read().splitlines()
 
-    left_list, right_list = zip(*(line.split() for line in input_data), strict=False)
-    left_list = sorted([int(element) for element in left_list])  # type: ignore[assignment]
-    right_list = sorted([int(element) for element in right_list])  # type: ignore[assignment]
+    unpar_left_list, unpar_right_list = zip(*(line.split() for line in input_data), strict=False)
+    left_list = sorted([int(element) for element in unpar_left_list])
+    right_list = sorted([int(element) for element in unpar_right_list])
 
     # part 1
     distances = [
