@@ -10,6 +10,9 @@ import itertools
 from pathlib import Path
 
 
+cwd = Path(__file__).parent
+
+
 def check(report: list[int]) -> bool:
     diffs = [el_1 - el_2 for el_1, el_2 in itertools.pairwise(report)]
     max_diff = max(abs(diff) for diff in diffs)
@@ -20,9 +23,7 @@ def check(report: list[int]) -> bool:
     return max_diff <= 3 and (is_trend_increasing or is_trend_decreasing)  # noqa: PLR2004
 
 
-def run() -> None:
-    path_to_input_data = Path(__file__).parent / "input.txt"
-
+def run(path_to_input_data: Path) -> tuple[int, int]:
     with path_to_input_data.open("r") as file:
         input_data = file.read().splitlines()
 
@@ -39,7 +40,8 @@ def run() -> None:
         else:
             unsafe_reports.append(report)
 
-    print(len(safe_reports))
+    part_1_answer = len(safe_reports)
+    print(part_1_answer)
 
     # part 2
     updated_safe_reports = []
@@ -51,8 +53,19 @@ def run() -> None:
                 updated_safe_reports.append(report)
                 break
 
+    part_2_answer = len(safe_reports) + len(updated_safe_reports)
     print(len(safe_reports) + len(updated_safe_reports))
+
+    return part_1_answer, part_2_answer
+
+
+def test_run() -> None:
+    expected_part_1_answer = 2
+    expectd_part_2_answer = 4
+
+    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    run()
+    run(cwd / "input.txt")
