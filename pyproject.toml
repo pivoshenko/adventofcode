@@ -7,7 +7,7 @@ authors = ["Volodymyr Pivoshenko <volodymyr.pivoshenko@gmail.com>"]
 maintainers = ["Volodymyr Pivoshenko <volodymyr.pivoshenko@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.13,<4.0"
+python = ">=3.12,<4.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = ">=4.0.1"
@@ -84,6 +84,8 @@ skip = ["poetry.lock"]
 [tool.deptry.per_rule_ignores]
 
 [tool.pytest.ini_options]
+python_files = "main.py"
+python_functions = "test_*"
 testpaths = ["."]
 addopts = ["-l", "-vv", "-rx", "--xdoc", "--color=yes"]
 

@@ -8,9 +8,10 @@ from __future__ import annotations
 from pathlib import Path
 
 
-def run() -> None:
-    path_to_input_data = Path(__file__).parent / "input.txt"
+cwd = Path(__file__).parent
 
+
+def run(path_to_input_data: Path) -> tuple[int, int]:
     with path_to_input_data.open("r") as file:
         input_data = file.read().splitlines()
 
@@ -33,6 +34,16 @@ def run() -> None:
     )
     print(similarity_score)
 
+    return total_distance, similarity_score
+
+
+def test_run() -> None:
+    expected_distances = 11
+    expectd_similarity_score = 13
+
+    distance, similarity_score = run(cwd / "example.txt")
+    assert (distance, similarity_score) == (expected_distances, expectd_similarity_score)
+
 
 if __name__ == "__main__":
-    run()
+    run(cwd / "input.txt")
