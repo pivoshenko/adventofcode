@@ -12,6 +12,9 @@ from __future__ import annotations
 from pathlib import Path
 
 
+cwd = Path(__file__).parent
+
+
 def print_grid(grid: list[list[str]]) -> None:
     print("\n".join(["".join(line) for line in grid]), end="\n\n\n")
 
@@ -31,9 +34,7 @@ def count_visited_tiles(
     return counter
 
 
-def run() -> None:  # noqa: C901, PLR0912, PLR0915
-    path_to_input_data = Path(__file__).parent / "input.txt"
-
+def run(path_to_input_data: Path) -> int:  # noqa: C901, PLR0912, PLR0915
     with path_to_input_data.open("r") as file:
         input_data = file.read()
 
@@ -165,6 +166,16 @@ def run() -> None:  # noqa: C901, PLR0912, PLR0915
         answer = count_visited_tiles(grid, tile=tile, obstacle=obstacle)
         print(answer)
 
+    return answer
+
+
+def test_run() -> None:
+    expected_part_1_answer = 41
+
+    part_1_answer = run(cwd / "example.txt")
+
+    assert part_1_answer == expected_part_1_answer
+
 
 if __name__ == "__main__":
-    run()
+    run(cwd / "input.txt")
