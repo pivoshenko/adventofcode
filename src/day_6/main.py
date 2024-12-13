@@ -164,7 +164,6 @@ def run(path_to_input_data: Path) -> int:  # noqa: C901, PLR0912, PLR0915
                         print_grid(grid)
     except IndexError:
         answer = count_visited_tiles(grid, tile=tile, obstacle=obstacle)
-        print(answer)
 
     return answer
 
@@ -178,4 +177,5 @@ def test_run() -> None:
 
 
 if __name__ == "__main__":
-    run(cwd / "input.txt")
+    part_1_answer = run(cwd / "input.txt")
+    print(part_1_answer)

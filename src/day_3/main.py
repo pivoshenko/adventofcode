@@ -13,7 +13,7 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def run(path_to_input_data: Path) -> tuple[int, int]:
+def run(path_to_input_data: Path) -> tuple[int, ...]:
     with path_to_input_data.open("r") as file:
         input_data = file.read()
 
@@ -26,8 +26,6 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
     for instruction in instructions:
         left, right = re.findall(numbers_pattern, instruction)
         part_1_answer += int(left) * int(right)
-
-    print(part_1_answer)
 
     # part 2
     new_instruction_pattern = r"mul\(\d+,\s*\d+\)|don't|do"
@@ -48,8 +46,6 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
             left, right = re.findall(numbers_pattern, instruction)
             part_2_answer += int(left) * int(right)
 
-    print(part_2_answer)
-
     return part_1_answer, part_2_answer
 
 
@@ -63,4 +59,5 @@ def test_run() -> None:
 
 
 if __name__ == "__main__":
-    run(cwd / "input.txt")
+    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    print(part_1_answer, part_2_answer)

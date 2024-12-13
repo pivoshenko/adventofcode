@@ -11,7 +11,7 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def run(path_to_input_data: Path) -> tuple[int, int]:
+def run(path_to_input_data: Path) -> tuple[int, ...]:
     with path_to_input_data.open("r") as file:
         input_data = file.read()
 
@@ -55,7 +55,6 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
             wrong_updates.append(update)
 
     part_1_answer = sum(update[len(update) // 2] for update in correct_updates)
-    print(part_1_answer)
 
     # part 2
     corrected_updates = []
@@ -77,7 +76,6 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
         corrected_updates.append(corrected_update)
 
     part_2_answer = sum(update[len(update) // 2] for update in corrected_updates)
-    print(part_2_answer)
 
     return part_1_answer, part_2_answer
 
@@ -92,4 +90,5 @@ def test_run() -> None:
 
 
 if __name__ == "__main__":
-    run(cwd / "input.txt")
+    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    print(part_1_answer, part_2_answer)

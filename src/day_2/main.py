@@ -23,7 +23,7 @@ def check(report: list[int]) -> bool:
     return max_diff <= 3 and (is_trend_increasing or is_trend_decreasing)  # noqa: PLR2004
 
 
-def run(path_to_input_data: Path) -> tuple[int, int]:
+def run(path_to_input_data: Path) -> tuple[int, ...]:
     with path_to_input_data.open("r") as file:
         input_data = file.read().splitlines()
 
@@ -41,7 +41,6 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
             unsafe_reports.append(report)
 
     part_1_answer = len(safe_reports)
-    print(part_1_answer)
 
     # part 2
     updated_safe_reports = []
@@ -54,7 +53,6 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
                 break
 
     part_2_answer = len(safe_reports) + len(updated_safe_reports)
-    print(len(safe_reports) + len(updated_safe_reports))
 
     return part_1_answer, part_2_answer
 
@@ -69,4 +67,5 @@ def test_run() -> None:
 
 
 if __name__ == "__main__":
-    run(cwd / "input.txt")
+    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    print(part_1_answer, part_2_answer)
