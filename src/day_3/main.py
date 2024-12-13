@@ -10,9 +10,10 @@ import re
 from pathlib import Path
 
 
-def run() -> None:
-    path_to_input_data = Path(__file__).parent / "input.txt"
+cwd = Path(__file__).parent
 
+
+def run(path_to_input_data: Path) -> tuple[int, int]:
     with path_to_input_data.open("r") as file:
         input_data = file.read()
 
@@ -49,6 +50,16 @@ def run() -> None:
 
     print(part_2_answer)
 
+    return part_1_answer, part_2_answer
+
+
+def test_run() -> None:
+    expected_part_1_answer = 161
+    expectd_part_2_answer = 48
+
+    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
+
 
 if __name__ == "__main__":
-    run()
+    run(cwd / "input.txt")
