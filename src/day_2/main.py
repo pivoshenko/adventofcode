@@ -64,6 +64,7 @@ def test_run() -> None:
     expectd_part_2_answer = 4
 
     part_1_answer, part_2_answer = run(cwd / "example.txt")
+
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 

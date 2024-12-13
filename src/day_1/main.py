@@ -42,6 +42,7 @@ def test_run() -> None:
     expectd_similarity_score = 13
 
     distance, similarity_score = run(cwd / "example.txt")
+
     assert (distance, similarity_score) == (expected_distances, expectd_similarity_score)
 
 
