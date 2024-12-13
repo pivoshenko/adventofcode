@@ -50,7 +50,6 @@ def run_part_1(path_to_input_data: Path) -> int:
                     if search_from(starting_pos_x, starting_pos_y, dx, dy):
                         answer += 1
 
-    print(answer)
     return answer
 
 
@@ -77,7 +76,6 @@ def run_part_2(path_to_input_data: Path) -> int:
                 } == _set:
                     answer += 1
 
-    print(answer)
     return answer
 
 
@@ -92,5 +90,6 @@ def test_run() -> None:
 
 
 if __name__ == "__main__":
-    run_part_1(cwd / "input.txt")
-    run_part_2(cwd / "input.txt")
+    part_1_answer = run_part_1(cwd / "input.txt")
+    part_2_answer = run_part_2(cwd / "input.txt")
+    print(part_1_answer, part_2_answer)

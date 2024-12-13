@@ -1,6 +1,6 @@
-"""Day 7: Day 7: Bridge Repair.
+"""Day 7: Bridge Repair.
 
-https://adventofcode.com/2024/day/6
+https://adventofcode.com/2024/day/7
 """
 
 from __future__ import annotations
@@ -39,9 +39,7 @@ def is_equation_valid(result: int, numbers: list[int], operators: str) -> bool:
     return False
 
 
-def run(path_to_input_data: Path) -> tuple[int, int]:
-    path_to_input_data = Path(__file__).parent / "input.txt"
-
+def run(path_to_input_data: Path) -> tuple[int, ...]:
     with path_to_input_data.open("r") as file:
         input_data = file.read()
 
@@ -55,7 +53,6 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
             part_1_answer += result
         else:
             nonvalid_equations.append((result, numbers))
-    print(part_1_answer)
 
     # part 2
     part_2_answer = 0
@@ -64,14 +61,13 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
             part_2_answer += result
 
     part_2_answer = part_1_answer + part_2_answer
-    print(part_2_answer)
 
     return part_1_answer, part_2_answer
 
 
-def test_day_7() -> None:
-    expected_part_1_answer = 1430271835320
-    expectd_part_2_answer = 456565678667482
+def test_run() -> None:
+    expected_part_1_answer = 3749
+    expectd_part_2_answer = 11387
 
     part_1_answer, part_2_answer = run(cwd / "example.txt")
 
@@ -79,4 +75,5 @@ def test_day_7() -> None:
 
 
 if __name__ == "__main__":
-    run(cwd / "input.txt")
+    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    print(part_1_answer, part_2_answer)

@@ -11,7 +11,7 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def run(path_to_input_data: Path) -> tuple[int, int]:
+def run(path_to_input_data: Path) -> tuple[int, ...]:
     with path_to_input_data.open("r") as file:
         input_data = file.read().splitlines()
 
@@ -25,14 +25,12 @@ def run(path_to_input_data: Path) -> tuple[int, int]:
         for left_element, right_element in zip(left_list, right_list, strict=False)
     ]
     total_distance = sum(distances)
-    print(total_distance)
 
     # part 2
     occurrences = {left_element: right_list.count(left_element) for left_element in left_list}
     similarity_score = sum(
         left_element * occurrence for left_element, occurrence in occurrences.items()
     )
-    print(similarity_score)
 
     return total_distance, similarity_score
 
@@ -47,4 +45,5 @@ def test_run() -> None:
 
 
 if __name__ == "__main__":
-    run(cwd / "input.txt")
+    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    print(part_1_answer, part_2_answer)
