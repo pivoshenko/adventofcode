@@ -8,9 +8,10 @@ from __future__ import annotations
 from pathlib import Path
 
 
-def run_part_1() -> None:
-    path_to_input_data = Path(__file__).parent / "input.txt"
+cwd = Path(__file__).parent
 
+
+def run_part_1(path_to_input_data: Path) -> int:
     with path_to_input_data.open("r") as file:
         input_data = file.read()
 
@@ -50,11 +51,10 @@ def run_part_1() -> None:
                         answer += 1
 
     print(answer)
+    return answer
 
 
-def run_part_2() -> None:
-    path_to_input_data = Path(__file__).parent / "input.txt"
-
+def run_part_2(path_to_input_data: Path) -> int:
     with path_to_input_data.open("r") as file:
         input_data = file.read()
 
@@ -78,8 +78,19 @@ def run_part_2() -> None:
                     answer += 1
 
     print(answer)
+    return answer
+
+
+def test_run() -> None:
+    expected_part_1_answer = 18
+    expectd_part_2_answer = 9
+
+    part_1_answer = run_part_1(cwd / "example.txt")
+    part_2_answer = run_part_2(cwd / "example.txt")
+
+    assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    run_part_1()
-    run_part_2()
+    run_part_1(cwd / "input.txt")
+    run_part_2(cwd / "input.txt")
