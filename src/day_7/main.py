@@ -1,4 +1,4 @@
-"""Day 7: 5.
+"""Day 7: Day 7: Bridge Repair.
 
 https://adventofcode.com/2024/day/6
 """
@@ -8,6 +8,9 @@ from __future__ import annotations
 import itertools
 
 from pathlib import Path
+
+
+cwd = Path(__file__).parent
 
 
 def parse_equation(unpar_equation: str) -> tuple[int, list[int]]:
@@ -36,7 +39,7 @@ def is_equation_valid(result: int, numbers: list[int], operators: str) -> bool:
     return False
 
 
-def run() -> None:
+def run(path_to_input_data: Path) -> tuple[int, int]:
     path_to_input_data = Path(__file__).parent / "input.txt"
 
     with path_to_input_data.open("r") as file:
@@ -60,8 +63,20 @@ def run() -> None:
         if is_equation_valid(result, numbers, "+*|"):
             part_2_answer += result
 
-    print(part_1_answer + part_2_answer)
+    part_2_answer = part_1_answer + part_2_answer
+    print(part_2_answer)
+
+    return part_1_answer, part_2_answer
+
+
+def test_day_7() -> None:
+    expected_part_1_answer = 1430271835320
+    expectd_part_2_answer = 456565678667482
+
+    part_1_answer, part_2_answer = run(cwd / "example.txt")
+
+    assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    run()
+    run(cwd / "input.txt")

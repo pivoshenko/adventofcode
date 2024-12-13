@@ -87,7 +87,7 @@ skip = ["poetry.lock"]
 python_files = "main.py"
 python_functions = "test_*"
 testpaths = ["."]
-addopts = ["-l", "-vv", "-rx", "--xdoc", "--color=yes"]
+addopts = ["-l", "-vv", "-rx", "--xdoc", "--color=yes", "--import-mode=importlib"]
 
 [tool.coverage.run]
 omit = ["*/__init__.py"]
