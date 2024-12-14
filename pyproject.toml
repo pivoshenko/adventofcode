@@ -115,6 +115,11 @@ sequence = [
   { shell = "cz check --rev-range .", help = "Run commits linter" }
 ]
 
+[tool.poe.tasks.tests]
+help = "Run tests"
+args = { dir = { options = ["--directory", "-d"], default = ".", help = "Target directory" } }
+shell = "pytest ${dir}"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
