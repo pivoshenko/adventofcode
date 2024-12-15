@@ -39,10 +39,7 @@ def is_equation_valid(result: int, numbers: list[int], operators: str) -> bool:
     return False
 
 
-def run(path_to_input_data: Path) -> tuple[int, ...]:
-    with path_to_input_data.open("r") as file:
-        input_data = file.read()
-
+def run(input_data: str) -> tuple[int, int]:
     equations = list(map(parse_equation, input_data.splitlines()))
 
     # part 1
@@ -69,11 +66,17 @@ def test_run() -> None:
     expected_part_1_answer = 3749
     expectd_part_2_answer = 11387
 
-    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
 
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
     print(part_1_answer, part_2_answer)

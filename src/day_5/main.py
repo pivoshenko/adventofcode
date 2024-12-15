@@ -11,21 +11,12 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def run(path_to_input_data: Path) -> tuple[int, ...]:
-    with path_to_input_data.open("r") as file:
-        input_data = file.read()
-
+def run(input_data: str) -> tuple[int, int]:
     unpar_rules, unpar_updates = input_data.split("\n\n")
-    rules = [
-        (
-            int(unpar_rule.split("|")[0]),
-            int(unpar_rule.split("|")[1]),
-        )
-        for unpar_rule in unpar_rules.splitlines()
-    ]
+
+    rules = [tuple(map(int, unpar_rule.split("|"))) for unpar_rule in unpar_rules.splitlines()]
     updates = [
-        [int(page) for page in unpar_update.split(",")]
-        for unpar_update in unpar_updates.splitlines()
+        list(map(int, unpar_update.split(","))) for unpar_update in unpar_updates.splitlines()
     ]
 
     # part 1
@@ -67,7 +58,6 @@ def run(path_to_input_data: Path) -> tuple[int, ...]:
                     page_index = corrected_update.index(page)
                     page_rule_index = corrected_update.index(page_rule)
                     if page_index > page_rule_index:
-                        # Swap to maintain the order as per the rule
                         corrected_update[page_index], corrected_update[page_rule_index] = (
                             corrected_update[page_rule_index],
                             corrected_update[page_index],
@@ -84,11 +74,17 @@ def test_run() -> None:
     expected_part_1_answer = 143
     expectd_part_2_answer = 123
 
-    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
 
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
     print(part_1_answer, part_2_answer)

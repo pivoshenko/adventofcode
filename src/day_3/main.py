@@ -13,10 +13,7 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def run(path_to_input_data: Path) -> tuple[int, ...]:
-    with path_to_input_data.open("r") as file:
-        input_data = file.read()
-
+def run(input_data: str) -> tuple[int, int]:
     # part 1
     instruction_pattern = r"mul\(\d+,\s*\d+\)"
     instructions = re.findall(instruction_pattern, input_data)
@@ -53,11 +50,17 @@ def test_run() -> None:
     expected_part_1_answer = 161
     expectd_part_2_answer = 48
 
-    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
 
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
     print(part_1_answer, part_2_answer)

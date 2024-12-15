@@ -11,16 +11,21 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def run_part_1(path_to_input_data: Path) -> int:
-    with path_to_input_data.open("r") as file:
-        input_data = file.read()
-
-    keyword = "XMAS"
-
+def run(input_data: str) -> tuple[int, int]:
     grid = input_data.splitlines()
     rows = len(grid)
     cols = len(grid[0])
+
+    part_1_answer = run_part_1(grid, rows, cols)
+    part_2_answer = run_part_2(grid, rows, cols)
+
+    return part_1_answer, part_2_answer
+
+
+def run_part_1(grid: list[str], rows: int, cols: int) -> int:
+    keyword = "XMAS"
     keyword_len = len(keyword)
+
     directions = [
         (0, 1),  # horizontal right
         (0, -1),  # horizontal left
@@ -53,27 +58,20 @@ def run_part_1(path_to_input_data: Path) -> int:
     return answer
 
 
-def run_part_2(path_to_input_data: Path) -> int:
-    with path_to_input_data.open("r") as file:
-        input_data = file.read()
-
-    grid = input_data.splitlines()
-    rows = len(grid)
-    cols = len(grid[0])
-    _set = {"M", "S"}
+def run_part_2(grid: list[str], rows: int, cols: int) -> int:
+    keyword_set = {"M", "S"}
 
     answer = 0
-
     for starting_pos_x in range(1, rows - 1):
         for starting_pos_y in range(1, cols - 1):
             if grid[starting_pos_x][starting_pos_y] == "A":  # noqa: SIM102
                 if {
                     grid[starting_pos_x - 1][starting_pos_y - 1],
                     grid[starting_pos_x + 1][starting_pos_y + 1],
-                } == _set and {
+                } == keyword_set and {
                     grid[starting_pos_x - 1][starting_pos_y + 1],
                     grid[starting_pos_x + 1][starting_pos_y - 1],
-                } == _set:
+                } == keyword_set:
                     answer += 1
 
     return answer
@@ -83,13 +81,17 @@ def test_run() -> None:
     expected_part_1_answer = 18
     expectd_part_2_answer = 9
 
-    part_1_answer = run_part_1(cwd / "example.txt")
-    part_2_answer = run_part_2(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
 
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    part_1_answer = run_part_1(cwd / "input.txt")
-    part_2_answer = run_part_2(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
     print(part_1_answer, part_2_answer)

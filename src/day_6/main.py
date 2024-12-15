@@ -1,10 +1,6 @@
 """Day 6: Guard Gallivant.
 
 https://adventofcode.com/2024/day/6
-
-# !!! BRUTEFOCE !!!
-# I am doing it when I have super limited time :3
-TODO REFACTOR IT!
 """
 
 from __future__ import annotations
@@ -15,167 +11,84 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def print_grid(grid: list[list[str]]) -> None:
-    print("\n".join(["".join(line) for line in grid]), end="\n\n\n")
+def count_visited_tiles(grid: list[list[str]], tile: str, obstacle: str) -> int:
+    return sum(1 for row in grid for cell in row if cell not in (tile, obstacle))
 
 
-def count_visited_tiles(
+def find_guard(grid: list[list[str]], tile: str, obstacle: str) -> tuple[int, int, str]:
+    for y, row in enumerate(grid):
+        for x, cell in enumerate(row):
+            if cell not in (tile, obstacle):
+                return x, y, cell
+    return -1, -1, ""
+
+
+def move_guard(  # noqa: PLR0913
+    curr_guard_pos_x: int,
+    curr_guard_pos_y: int,
+    curr_guard_dir: str,
     grid: list[list[str]],
-    tile: str,
+    directions: dict[str, tuple[int, int]],
     obstacle: str,
-) -> int:
-    rows = len(grid)
-    cols = len(grid[0])
-    counter = 0
-    for y in range(rows):
-        for x in range(cols):
-            if grid[y][x] not in (tile, obstacle):
-                counter += 1
-    return counter
+    visited: str,
+) -> None:
+    guard_up, guard_right, guard_down, guard_left = directions.keys()
+    while True:
+        dir_x, dir_y = directions[curr_guard_dir]
+        new_guard_pos_x = curr_guard_pos_x + dir_x
+        new_guard_pos_y = curr_guard_pos_y + dir_y
+        if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
+            grid[new_guard_pos_y][new_guard_pos_x] = curr_guard_dir
+            grid[curr_guard_pos_y][curr_guard_pos_x] = visited
+            curr_guard_pos_x, curr_guard_pos_y = new_guard_pos_x, new_guard_pos_y
+        else:
+            curr_guard_dir = {
+                guard_up: guard_right,
+                guard_right: guard_down,
+                guard_down: guard_left,
+                guard_left: guard_up,
+            }[curr_guard_dir]
 
 
-def run(path_to_input_data: Path) -> int:  # noqa: C901, PLR0912, PLR0915
-    with path_to_input_data.open("r") as file:
-        input_data = file.read()
-
+def run(input_data: str) -> int:  # type: ignore[return]
     grid = [list(line) for line in input_data.splitlines()]
-    rows = len(grid)
-    cols = len(grid[0])
 
-    tile = "."
-    obstacle = "#"
-    visited = "X"
-
-    guard_up = "^"
-    guard_up_dir = (0, 1)  # <x, y>
-
-    guard_down = "v"
-    guard_down_dir = (0, -1)  # <x, y>
-
-    guard_right = ">"
-    guard_right_dir = (1, 0)  # <x, y>
-
-    guard_left = "<"
-    guard_left_dir = (-1, 0)  # <x, y>
-
-    curr_guard_pos_y = -1
-    curr_guard_pos_x = -1
-    curr_guard_dir = ""
-
-    for y in range(rows):
-        for x in range(cols):
-            if grid[y][x] not in (tile, obstacle):
-                curr_guard_pos_x = x
-                curr_guard_pos_y = y
-                curr_guard_dir = grid[y][x]
-
-    print_grid(grid)
-
+    tile, obstacle, visited = ".", "#", "X"
+    directions = {
+        "^": (0, -1),
+        ">": (1, 0),
+        "v": (0, 1),
+        "<": (-1, 0),
+    }
+    curr_guard_pos_x, curr_guard_pos_y, curr_guard_dir = find_guard(grid, tile, obstacle)
     try:
-        while True:
-            if curr_guard_dir == guard_up:
-                new_guard_pos_x = curr_guard_pos_x + guard_up_dir[0]
-                new_guard_pos_y = curr_guard_pos_y - guard_up_dir[1]
-
-                if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                    grid[new_guard_pos_y][new_guard_pos_x] = guard_up
-                    grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                    curr_guard_pos_x = new_guard_pos_x
-                    curr_guard_pos_y = new_guard_pos_y
-                    curr_guard_dir = guard_up
-                    print_grid(grid)
-
-                else:
-                    new_guard_pos_x = curr_guard_pos_x + guard_right_dir[0]
-                    new_guard_pos_y = curr_guard_pos_y + guard_right_dir[1]
-                    if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                        grid[new_guard_pos_y][new_guard_pos_x] = guard_right
-                        grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                        curr_guard_pos_x = new_guard_pos_x
-                        curr_guard_pos_y = new_guard_pos_y
-                        curr_guard_dir = guard_right
-                        print_grid(grid)
-
-            if curr_guard_dir == guard_right:
-                new_guard_pos_x = curr_guard_pos_x + guard_right_dir[0]
-                new_guard_pos_y = curr_guard_pos_y + guard_right_dir[1]
-                if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                    grid[new_guard_pos_y][new_guard_pos_x] = guard_right
-                    grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                    curr_guard_pos_x = new_guard_pos_x
-                    curr_guard_pos_y = new_guard_pos_y
-                    curr_guard_dir = guard_right
-                    print_grid(grid)
-
-                else:
-                    new_guard_pos_x = curr_guard_pos_x + guard_down_dir[0]
-                    new_guard_pos_y = curr_guard_pos_y - guard_down_dir[1]
-                    if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                        grid[new_guard_pos_y][new_guard_pos_x] = guard_down
-                        grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                        curr_guard_pos_x = new_guard_pos_x
-                        curr_guard_pos_y = new_guard_pos_y
-                        curr_guard_dir = guard_down
-                        print_grid(grid)
-
-            if curr_guard_dir == guard_down:
-                new_guard_pos_x = curr_guard_pos_x + guard_down_dir[0]
-                new_guard_pos_y = curr_guard_pos_y - guard_down_dir[1]
-                if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                    grid[new_guard_pos_y][new_guard_pos_x] = guard_down
-                    grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                    curr_guard_pos_x = new_guard_pos_x
-                    curr_guard_pos_y = new_guard_pos_y
-                    curr_guard_dir = guard_down
-                    print_grid(grid)
-
-                else:
-                    new_guard_pos_x = curr_guard_pos_x + guard_left_dir[0]
-                    new_guard_pos_y = curr_guard_pos_y + guard_left_dir[1]
-                    if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                        grid[new_guard_pos_y][new_guard_pos_x] = guard_left
-                        grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                        curr_guard_pos_x = new_guard_pos_x
-                        curr_guard_pos_y = new_guard_pos_y
-                        curr_guard_dir = guard_left
-                        print_grid(grid)
-
-            if curr_guard_dir == guard_left:
-                new_guard_pos_x = curr_guard_pos_x + guard_left_dir[0]
-                new_guard_pos_y = curr_guard_pos_y + guard_left_dir[1]
-                if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                    grid[new_guard_pos_y][new_guard_pos_x] = guard_left
-                    grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                    curr_guard_pos_x = new_guard_pos_x
-                    curr_guard_pos_y = new_guard_pos_y
-                    curr_guard_dir = guard_left
-                    print_grid(grid)
-
-                else:
-                    new_guard_pos_x = curr_guard_pos_x + guard_up_dir[0]
-                    new_guard_pos_y = curr_guard_pos_y - guard_up_dir[1]
-
-                    if grid[new_guard_pos_y][new_guard_pos_x] != obstacle:
-                        grid[new_guard_pos_y][new_guard_pos_x] = guard_up
-                        grid[curr_guard_pos_y][curr_guard_pos_x] = visited
-                        curr_guard_pos_x = new_guard_pos_x
-                        curr_guard_pos_y = new_guard_pos_y
-                        curr_guard_dir = guard_up
-                        print_grid(grid)
+        move_guard(
+            curr_guard_pos_x,
+            curr_guard_pos_y,
+            curr_guard_dir,
+            grid,
+            directions,
+            obstacle,
+            visited,
+        )
     except IndexError:
-        answer = count_visited_tiles(grid, tile=tile, obstacle=obstacle)
-
-    return answer
+        return count_visited_tiles(grid, tile, obstacle)
 
 
 def test_run() -> None:
     expected_part_1_answer = 41
 
-    part_1_answer = run(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer = run(input_data)
 
     assert part_1_answer == expected_part_1_answer
 
 
 if __name__ == "__main__":
-    part_1_answer = run(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer = run(input_data)
     print(part_1_answer)
