@@ -99,7 +99,7 @@ poetry_command = ""
 help = "Run formatters"
 args = { dir = { options = ["--directory", "-d"], default = ".", help = "Target directory" } }
 sequence = [
-  { shell = "find src -type f -name '*.py' | xargs pyupgrade --py313-plus", help = "Run annotations formatter" },
+  { shell = "find . -type f -name '*.py' ! -path './.venv/*' | xargs pyupgrade --py313-plus", help = "Run annotations formatter" },
   { shell = "isort ${dir}", help = "Run imports formatter" },
   { shell = "ruff format ${dir}", help = "Run code formatter" }
 ]

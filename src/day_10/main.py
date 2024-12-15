@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 
 
 cwd = Path(__file__).parent
+peak = 9
 
 
 def get_neighbors(x: int, y: int, grid: list[list[int]]) -> Iterator[tuple[int, int]]:
@@ -37,7 +38,7 @@ def count_reachable_nines(start: tuple[int, int], grid: list[list[int]]) -> int:
         (x, y), path = queue.popleft()
         current_height = grid[y][x]
 
-        if current_height == 9:  # noqa: PLR2004
+        if current_height == peak:
             reachable_nines.add((x, y))
             continue
 
@@ -65,7 +66,7 @@ def count_distinct_trails(start: tuple[int, int], grid: list[list[int]]) -> int:
         (x, y), path = queue.popleft()
         current_height = grid[y][x]
 
-        if current_height == 9:  # noqa: PLR2004
+        if current_height == peak:
             distinct_paths.add(path)
             continue
 
@@ -82,9 +83,8 @@ def count_distinct_trails(start: tuple[int, int], grid: list[list[int]]) -> int:
     return len(distinct_paths)
 
 
-def run(path_to_input_data: Path) -> tuple[int, ...]:
-    with path_to_input_data.open("r") as file:
-        grid = [[int(char) for char in line.strip()] for line in file if line.strip()]
+def run(input_data: str) -> tuple[int, int]:
+    grid = [list(map(int, line.strip())) for line in input_data.splitlines() if line.strip()]
 
     trailheads: list[tuple[int, int]] = []
     for y in range(len(grid)):
@@ -103,11 +103,17 @@ def test_run() -> None:
     expected_part_1_answer = 36
     expectd_part_2_answer = 81
 
-    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
 
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
     print(part_1_answer, part_2_answer)

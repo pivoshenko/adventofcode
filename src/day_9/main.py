@@ -11,17 +11,14 @@ from pathlib import Path
 cwd = Path(__file__).parent
 
 
-def run(path_to_input_data: Path) -> tuple[int, ...]:  # noqa: C901, PLR0912
-    with path_to_input_data.open("r") as file:
-        input_data = file.read().replace("\n", "")
-
+def run(input_data: str) -> tuple[int, int]:  # noqa: C901, PLR0912
     blocks: list[int | str] = []
     file_blocks_len: list[tuple[int, int]] = []
 
     file_index = 0
     empty_block = "."
 
-    for index, block_len in enumerate(input_data):
+    for index, block_len in enumerate(input_data.replace("\n", "")):
         if (index + 1) % 2 != 0 or index == 0:
             block = file_index
             file_index += 1
@@ -103,11 +100,17 @@ def test_run() -> None:
     expected_part_1_answer = 1928
     expectd_part_2_answer = 2858
 
-    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
 
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
     print(part_1_answer, part_2_answer)

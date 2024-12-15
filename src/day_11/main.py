@@ -5,54 +5,37 @@ https://adventofcode.com/2024/day/11
 
 from __future__ import annotations
 
+from functools import cache
 from pathlib import Path
 
 
 cwd = Path(__file__).parent
 
 
-def split_number(num: int) -> tuple[int, int]:
-    num_str = str(num)
-    mid = len(num_str) // 2
-    left = int(num_str[:mid])
-    right = int(num_str[mid:])
-    return left, right
+def blink_dfs(blinks: int, stones: list[str]) -> int:
+    @cache
+    def dfs_helper(val: str, to_go: int) -> int:
+        if to_go == 0:
+            return 1
+        if val == "0":
+            return dfs_helper("1", to_go - 1)
+        if len(val) % 2 == 0:
+            n = len(val) // 2
+            left = val[:n]
+            right = val[n:]
+            while right.startswith("0") and len(right) > 1:
+                right = right[1:]
+            return dfs_helper(left, to_go - 1) + dfs_helper(right, to_go - 1)
+        return dfs_helper(str(int(val) * 2024), to_go - 1)
+
+    return sum([dfs_helper(val, blinks) for val in stones])
 
 
-def has_even_digits(num: int) -> bool:
-    return len(str(num)) % 2 == 0
+def run(input_data: str) -> tuple[int, int]:
+    initial_stones = [char.replace("\n", "") for char in input_data.split(" ")]
 
-
-def transform_stones(stones: list[int]) -> list[int]:
-    new_stones = []
-
-    for stone in stones:
-        if stone == 0:
-            new_stones.append(1)
-        elif has_even_digits(stone):
-            left, right = split_number(stone)
-            new_stones.extend([left, right])
-        else:
-            new_stones.append(stone * 2024)
-
-    return new_stones
-
-
-def run(path_to_input_data: Path) -> tuple[int, ...]:
-    with path_to_input_data.open("r") as file:
-        input_date = file.read()
-
-    initial_stones = [int(char) for char in input_date.strip().split()]
-
-    # part 1
-    num_blinks = 25
-    stones = initial_stones.copy()
-    for _ in range(num_blinks):
-        stones = transform_stones(stones)
-    part_1_answer = len(stones)
-
-    # too heavy to compute each time :3
-    part_2_answer = 65601038650482
+    part_1_answer = blink_dfs(25, initial_stones)
+    part_2_answer = blink_dfs(75, initial_stones)
 
     return part_1_answer, part_2_answer
 
@@ -61,11 +44,17 @@ def test_run() -> None:
     expected_part_1_answer = 55312
     expectd_part_2_answer = 65601038650482
 
-    part_1_answer, part_2_answer = run(cwd / "example.txt")
+    with (cwd / "example.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
 
     assert (part_1_answer, part_2_answer) == (expected_part_1_answer, expectd_part_2_answer)
 
 
 if __name__ == "__main__":
-    part_1_answer, part_2_answer = run(cwd / "input.txt")
+    with (cwd / "input.txt").open() as file:
+        input_data = file.read()
+
+    part_1_answer, part_2_answer = run(input_data)
     print(part_1_answer, part_2_answer)
