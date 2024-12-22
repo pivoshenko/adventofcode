@@ -84,7 +84,7 @@ def test_run() -> None:
 
 
 if __name__ == "__main__":
-    with (cwd / "example.txt").open() as file:
+    with (cwd / "input.txt").open() as file:
         input_data = file.read()
 
     part_1_answer, part_2_answer = run(input_data)
