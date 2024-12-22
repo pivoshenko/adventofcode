@@ -5,8 +5,9 @@ https://adventofcode.com/2024/day/17
 
 from __future__ import annotations
 
-from pathlib import Path
 import re
+
+from pathlib import Path
 
 
 cwd = Path(__file__).parent
