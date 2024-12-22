@@ -20,7 +20,7 @@ def check(report: list[int]) -> bool:
     is_trend_increasing = all(el_1 < el_2 for el_1, el_2 in itertools.pairwise(report))
     is_trend_decreasing = all(el_1 > el_2 for el_1, el_2 in itertools.pairwise(report))
 
-    return max_diff <= 3 and (is_trend_increasing or is_trend_decreasing)  # noqa: PLR2004
+    return max_diff <= 3 and (is_trend_increasing or is_trend_decreasing)
 
 
 def run(input_data: str) -> tuple[int, int]:
