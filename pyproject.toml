@@ -81,7 +81,7 @@ ignore = ["S101", "INP001", "T201", "I001", "D103", "B023", "PLR2004"]
 required-imports = ["from __future__ import annotations"]
 
 [tool.codespell]
-skip = ["poetry.lock"]
+skip = ["poetry.lock", "./src/*/input.txt"]
 
 [tool.deptry.per_rule_ignores]
 
