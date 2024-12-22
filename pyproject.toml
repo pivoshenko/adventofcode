@@ -17,13 +17,13 @@ ipython = ">=8.12.3"
 
 [tool.poetry.group.formatters.dependencies]
 isort = ">=5.13.2"
-ruff = ">=0.8.3"
-pyupgrade = ">=3.19.0"
+ruff = ">=0.8.4"
+pyupgrade = ">=3.19.1"
 
 [tool.poetry.group.linters.dependencies]
-mypy = ">=1.13.0"
-ruff = ">=0.8.3"
-deptry = ">=0.21.1"
+mypy = ">=1.14.0"
+ruff = ">=0.8.4"
+deptry = ">=0.21.2"
 codespell = ">=2.3.0"
 commitizen = ">=4.1.0"
 
