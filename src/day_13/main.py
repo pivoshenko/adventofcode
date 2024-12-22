@@ -22,7 +22,7 @@ def parse_machine_params(machine: str) -> list[int]:
 
 
 def run_part_1(machines_params: list[list[int]], a_press_cost: int, b_press_cost: int) -> int:
-    part_1_answer = 0
+    answer = 0
     max_tokens = 100
 
     for machine_params in machines_params:
@@ -41,13 +41,13 @@ def run_part_1(machines_params: list[list[int]], a_press_cost: int, b_press_cost
                         is_solved = True
 
         if is_solved:
-            part_1_answer += min_cost  # type: ignore[assignment]
+            answer += min_cost  # type: ignore[assignment]
 
-    return part_1_answer
+    return answer
 
 
 def run_part_2(machines_params: list[list[int]], a_press_cost: int, b_press_cost: int) -> int:
-    part_2_answer = 0
+    answer = 0
     offset = 10000000000000
     for machine_params in machines_params:
         a_x, a_y, b_x, b_y, p_x, p_y = machine_params
@@ -59,9 +59,9 @@ def run_part_2(machines_params: list[list[int]], a_press_cost: int, b_press_cost
         y = (a_x * p_y - p_x * a_y) / (a_x * b_y - b_x * a_y)
 
         if x.is_integer() and y.is_integer():
-            part_2_answer += int(x * a_press_cost + y * b_press_cost)
+            answer += int(x * a_press_cost + y * b_press_cost)
 
-    return part_2_answer
+    return answer
 
 
 def run(input_data: str) -> tuple[int, int]:

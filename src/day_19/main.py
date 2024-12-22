@@ -12,7 +12,7 @@ cwd = Path(__file__).parent
 
 
 def run_part_1(towels: list[str], lines: list[str]) -> int:
-    part_1_answer = 0
+    answer = 0
     for line in lines:
         letters = [False] * (len(line) + 1)
         letters[0] = True
@@ -23,13 +23,13 @@ def run_part_1(towels: list[str], lines: list[str]) -> int:
                     letters[i] = True
                     break
         if letters[len(line)]:
-            part_1_answer += 1
+            answer += 1
 
-    return part_1_answer
+    return answer
 
 
 def run_part_2(towels: list[str], lines: list[str]) -> int:
-    part_2_answer = 0
+    answer = 0
     for line in lines:
         letters = [0] * (len(line) + 1)
         letters[0] = 1
@@ -39,8 +39,8 @@ def run_part_2(towels: list[str], lines: list[str]) -> int:
                 if line[i - len(towel) : i] == towel and letters[i - len(towel)]:
                     letters[i] += letters[i - len(towel)]
 
-        part_2_answer += letters[len(line)]
-    return part_2_answer
+        answer += letters[len(line)]
+    return answer
 
 
 def run(input_data: str) -> tuple[int, int]:
