@@ -23,7 +23,7 @@ def calculate_fencing_cost(grid: list[list[str]]) -> int:
             area += 1
             for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 nx, ny = x + dx, y + dy
-                if 0 <= nx < rows and 0 <= ny < cols and grid[nx][ny] == plant_type:
+                if 0 <= nx < rows and 0 <= ny < columns and grid[nx][ny] == plant_type:
                     if (nx, ny) not in visited:
                         visited.add((nx, ny))
                         queue.append((nx, ny))
@@ -32,15 +32,15 @@ def calculate_fencing_cost(grid: list[list[str]]) -> int:
         return area, perimeter
 
     rows: int = len(grid)
-    cols: int = len(grid[0])
+    columns: int = len(grid[0])
     visited: set[tuple[int, int]] = set()
     total_cost: int = 0
 
-    for i in range(rows):
-        for j in range(cols):
-            if (i, j) not in visited:
-                plant_type = grid[i][j]
-                area, perimeter = bfs((i, j), plant_type)
+    for y in range(rows):
+        for x in range(columns):
+            if (y, x) not in visited:
+                plant_type = grid[y][x]
+                area, perimeter = bfs((y, x), plant_type)
                 total_cost += area * perimeter
 
     return total_cost
@@ -58,7 +58,7 @@ def calculate_fencing_cost_part_two(grid: list[list[str]]) -> int:
             sides += 4  # Each cell starts with 4 sides
             for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
                 nx, ny = x + dx, y + dy
-                if 0 <= nx < rows and 0 <= ny < cols and grid[nx][ny] == plant_type:
+                if 0 <= nx < rows and 0 <= ny < columns and grid[nx][ny] == plant_type:
                     sides -= 1  # Subtract 1 side for each internal connection
                     if (nx, ny) not in visited:
                         visited.add((nx, ny))
@@ -66,15 +66,15 @@ def calculate_fencing_cost_part_two(grid: list[list[str]]) -> int:
         return area, sides
 
     rows: int = len(grid)
-    cols: int = len(grid[0])
+    columns: int = len(grid[0])
     visited: set[tuple[int, int]] = set()
     total_cost: int = 0
 
-    for i in range(rows):
-        for j in range(cols):
-            if (i, j) not in visited:
-                plant_type = grid[i][j]
-                area, sides = bfs((i, j), plant_type)
+    for y in range(rows):
+        for x in range(columns):
+            if (y, x) not in visited:
+                plant_type = grid[y][x]
+                area, sides = bfs((y, x), plant_type)
                 total_cost += area * sides
 
     return total_cost
