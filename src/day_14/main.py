@@ -57,7 +57,7 @@ def run_part_2(robots_params: list[list[int]], width: int, height: int) -> int:
 
     middle_col = (width - 1) / 2
     max_unique_pos_count = 0
-    best_sec = num_seconds
+    answer = num_seconds
     for sec in range(num_seconds):
         unique_pos_count = 0
         for i in range(-2, 2):
@@ -65,9 +65,9 @@ def run_part_2(robots_params: list[list[int]], width: int, height: int) -> int:
             unique_pos_count += len(occupied_col_positions)
         if unique_pos_count > max_unique_pos_count:
             max_unique_pos_count = unique_pos_count
-            best_sec = sec
+            answer = sec
 
-    return best_sec
+    return answer
 
 
 def run(input_data: str, width: int, height: int) -> tuple[int, int]:
