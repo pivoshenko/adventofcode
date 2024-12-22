@@ -14,15 +14,15 @@ cwd = Path(__file__).parent
 def run(input_data: str) -> tuple[int, int]:
     grid = input_data.splitlines()
     rows = len(grid)
-    cols = len(grid[0])
+    columns = len(grid[0])
 
-    part_1_answer = run_part_1(grid, rows, cols)
-    part_2_answer = run_part_2(grid, rows, cols)
+    part_1_answer = run_part_1(grid, rows, columns)
+    part_2_answer = run_part_2(grid, rows, columns)
 
     return part_1_answer, part_2_answer
 
 
-def run_part_1(grid: list[str], rows: int, cols: int) -> int:
+def run_part_1(grid: list[str], rows: int, columns: int) -> int:
     keyword = "XMAS"
     keyword_len = len(keyword)
 
@@ -38,7 +38,7 @@ def run_part_1(grid: list[str], rows: int, cols: int) -> int:
     ]
 
     def is_valid(x: int, y: int) -> bool:
-        return 0 <= x < rows and 0 <= y < cols
+        return 0 <= x < rows and 0 <= y < columns
 
     def search_from(x: int, y: int, dx: int, dy: int) -> bool:
         for i in range(keyword_len):
@@ -49,7 +49,7 @@ def run_part_1(grid: list[str], rows: int, cols: int) -> int:
 
     answer = 0
     for starting_pos_x in range(rows):
-        for starting_pos_y in range(cols):
+        for starting_pos_y in range(columns):
             if grid[starting_pos_x][starting_pos_y] == keyword[0]:
                 for dx, dy in directions:
                     if search_from(starting_pos_x, starting_pos_y, dx, dy):
@@ -58,12 +58,12 @@ def run_part_1(grid: list[str], rows: int, cols: int) -> int:
     return answer
 
 
-def run_part_2(grid: list[str], rows: int, cols: int) -> int:
+def run_part_2(grid: list[str], rows: int, columns: int) -> int:
     keyword_set = {"M", "S"}
 
     answer = 0
     for starting_pos_x in range(1, rows - 1):
-        for starting_pos_y in range(1, cols - 1):
+        for starting_pos_y in range(1, columns - 1):
             if grid[starting_pos_x][starting_pos_y] == "A":  # noqa: SIM102
                 if {
                     grid[starting_pos_x - 1][starting_pos_y - 1],
