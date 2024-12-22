@@ -42,6 +42,7 @@ pytest-codeblocks = ">=0.17.0"
 pytest-mock = ">=3.14.0"
 pytest-cov = ">=6.0.0"
 pytest-sugar = ">=1.0.0"
+pytest-watcher = ">=0.4.3"
 coverage = { version = ">=7.6.9", extras = ["toml"] }
 
 [tool.commitizen]
