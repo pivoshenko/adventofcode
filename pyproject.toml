@@ -50,32 +50,30 @@ coverage = { version = ">=7.6.9", extras = ["toml"] }
 allowed_prefixes = ["Merge", "Initial"]
 
 [tool.isort]
-profile = "black"
+color_output = true
+force_alphabetical_sort_within_sections = true
+force_single_line = true
+length_sort_straight = true
 line_length = 100
 lines_after_imports = 2
 lines_between_types = 1
-color_output = true
-force_single_line = true
-length_sort_straight = true
-force_alphabetical_sort_within_sections = true
+profile = "black"
 
 [tool.mypy]
+explicit_package_bases = true
+namespace_packages = true
 python_version = "3.13"
+show_error_codes = true
 strict = true
 warn_unused_configs = true
-show_error_codes = true
-namespace_packages = true
-explicit_package_bases = true
 
 [tool.ruff]
-target-version = "py313"
 line-length = 100
+target-version = "py313"
 
 [tool.ruff.lint]
+ignore = ["B023", "D103", "FIX", "I001", "INP001", "PLR2004", "S101", "T201", "TD"]
 select = ["ALL"]
-ignore = ["S101", "INP001", "T201", "I001", "D103", "B023", "PLR2004"]
-
-[tool.ruff.lint.per-file-ignores]
 
 [tool.ruff.lint.isort]
 required-imports = ["from __future__ import annotations"]
@@ -86,10 +84,10 @@ skip = ["poetry.lock", "./src/*/input.txt"]
 [tool.deptry.per_rule_ignores]
 
 [tool.pytest.ini_options]
+addopts = ["--color=yes", "--import-mode=importlib", "--xdoc", "-l", "-rx", "-vv"]
 python_files = "main.py"
 python_functions = "test_*"
 testpaths = ["."]
-addopts = ["-l", "-vv", "-rx", "--xdoc", "--color=yes", "--import-mode=importlib"]
 
 [tool.coverage.run]
 omit = ["*/__init__.py"]
