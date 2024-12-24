@@ -1,6 +1,6 @@
 """Day 20: RAcolumns Run.
 
-https://adventofcode.com/2024/day/18
+https://adventofcode.com/2024/day/20
 """
 
 from __future__ import annotations
