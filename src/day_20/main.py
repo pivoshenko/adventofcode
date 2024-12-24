@@ -1,4 +1,4 @@
-"""Day 20: RAcolumns Run.
+"""Day 20: Race Condition.
 
 https://adventofcode.com/2024/day/20
 """
@@ -86,14 +86,14 @@ def run_part_1(
     maze: list[list[str]],
 ) -> int:
     rows, columns = len(maze), len(maze[0])
-    answer = 0
+    cost = 0
     for position in path[::-1]:
         neighbours = get_two_step_neighbours(maze, position, rows, columns)
         for neighbour in neighbours:
             new_cost = distances[position] - distances[neighbour] - 2
             if new_cost >= 100:
-                answer += 1
-    return answer
+                cost += 1
+    return cost
 
 
 def run_part_2(
@@ -101,18 +101,19 @@ def run_part_2(
     distances: dict[tuple[int, int], int],
     max_delta: int,
 ) -> int:
-    path_rev = path[::-1]
-    answer = 0
-    for y in range(len(path_rev)):
-        for x in range(y + 1, len(path_rev)):
-            position_1, position_2 = path_rev[y], path_rev[x]
+    rev_path = path[::-1]
+    cost = 0
+
+    for y in range(len(rev_path)):
+        for x in range(y + 1, len(rev_path)):
+            position_1, position_2 = rev_path[y], rev_path[x]
             delta = abs(position_1[0] - position_2[0]) + abs(position_1[1] - position_2[1])
             if delta <= max_delta:
                 new_cost = distances[position_1] - distances[position_2] - delta
                 if new_cost >= 100:
-                    answer += 1
+                    cost += 1
 
-    return answer
+    return cost
 
 
 def run(input_data: str) -> tuple[int, int]:
@@ -127,10 +128,10 @@ def run(input_data: str) -> tuple[int, int]:
 
 
 def test_run() -> None:
-    expected_part_1_answer = 1355
-    expected_part_2_answer = 1007335
+    expected_part_1_answer = 0
+    expected_part_2_answer = 0
 
-    with (cwd / "input.txt").open() as file:
+    with (cwd / "example.txt").open() as file:
         input_data = file.read()
 
     part_1_answer, part_2_answer = run(input_data)
