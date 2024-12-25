@@ -29,7 +29,7 @@ def run_part_2() -> int:
     return -1
 
 
-def run(input_data: str) -> tuple[int, str]:
+def run(input_data: str) -> tuple[int, int]:
     lines = input_data.splitlines()
     transmit_bloks = [lines[i : i + 7] for i in range(0, len(lines), 8)]
 
