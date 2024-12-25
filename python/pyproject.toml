@@ -82,10 +82,11 @@ required-imports = ["from __future__ import annotations"]
 skip = ["poetry.lock", "./src/*/input.txt"]
 
 [tool.deptry.per_rule_ignores]
+DEP004 = ["pytest"]
 
 [tool.pytest.ini_options]
 addopts = ["--color=yes", "--import-mode=importlib", "--xdoc", "-l", "-rx", "-vv"]
-python_files = "main.py"
+python_files = ["main.py", "part_01.py", "part_02.py"]
 python_functions = "test_*"
 testpaths = ["."]
 

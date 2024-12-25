@@ -162,4 +162,9 @@ cython_debug/
 .idea/
 
 # AoC personal input
-**/input.txt
+data/input/*/*.txt
+python/*/*/*/*.txt
+
+# temporary files
+tmp.*
+temp.*
