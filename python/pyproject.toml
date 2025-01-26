@@ -10,28 +10,28 @@ maintainers = ["Volodymyr Pivoshenko <volodymyr.pivoshenko@gmail.com>"]
 python = ">=3.12,<4.0"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = ">=4.0.1"
-poethepoet = ">=0.31.1"
+pre-commit = ">=4.1.0"
+poethepoet = ">=0.32.1"
 ipdb = ">=0.13.13"
-ipython = ">=8.12.3"
+ipython = ">=8.31.0"
 watchdog = ">=6.0.0"
 
 [tool.poetry.group.formatters.dependencies]
 isort = ">=5.13.2"
-ruff = ">=0.8.4"
+ruff = ">=0.9.3"
 pyupgrade = ">=3.19.1"
 
 [tool.poetry.group.linters.dependencies]
-mypy = ">=1.14.0"
-ruff = ">=0.8.4"
-deptry = ">=0.21.2"
-codespell = ">=2.3.0"
-commitizen = ">=4.1.0"
+mypy = ">=1.14.1"
+ruff = ">=0.9.3"
+deptry = ">=0.23.0"
+codespell = ">=2.4.0"
+commitizen = ">=4.1.1"
 
 [tool.poetry.group.lsp.dependencies]
 python-lsp-server = { extras = ["all"], version = ">=1.12.0" }
-ruff-lsp = ">=0.0.59"
-pylsp-mypy = ">=0.6.9"
+ruff-lsp = ">=0.0.60"
+pylsp-mypy = ">=0.7.0"
 pylsp-rope = ">=0.1.17"
 python-lsp-isort = ">=0.2.0"
 
@@ -44,7 +44,7 @@ pytest-mock = ">=3.14.0"
 pytest-cov = ">=6.0.0"
 pytest-sugar = ">=1.0.0"
 pytest-watcher = ">=0.4.3"
-coverage = { version = ">=7.6.9", extras = ["toml"] }
+coverage = { version = ">=7.6.10", extras = ["toml"] }
 
 [tool.commitizen]
 allowed_prefixes = ["Merge", "Initial"]
