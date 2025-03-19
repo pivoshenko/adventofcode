@@ -1,53 +1,61 @@
 [tool.poetry]
 name = "adventofcode"
-version = "0.0.0"
 description = "adventofcode"
+version = "0.0.0"
 license = "MIT"
 authors = ["Volodymyr Pivoshenko <volodymyr.pivoshenko@gmail.com>"]
-maintainers = ["Volodymyr Pivoshenko <volodymyr.pivoshenko@gmail.com>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.12,<4.0"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = ">=4.1.0"
-poethepoet = ">=0.32.1"
 ipdb = ">=0.13.13"
-ipython = ">=8.31.0"
+ipython = ">=9.0.2"
+poethepoet = ">=0.33.1"
 watchdog = ">=6.0.0"
 
 [tool.poetry.group.formatters.dependencies]
-isort = ">=5.13.2"
-ruff = ">=0.9.3"
+isort = ">=6.0.1"
 pyupgrade = ">=3.19.1"
+ruff = ">=0.11.0"
 
 [tool.poetry.group.linters.dependencies]
-mypy = ">=1.14.1"
-ruff = ">=0.9.3"
+codespell = ">=2.4.1"
+commitizen = ">=4.4.1"
 deptry = ">=0.23.0"
-codespell = ">=2.4.0"
-commitizen = ">=4.1.1"
+mypy = ">=1.15.0"
+ruff = ">=0.11.0"
 
 [tool.poetry.group.lsp.dependencies]
-python-lsp-server = { extras = ["all"], version = ">=1.12.0" }
-ruff-lsp = ">=0.0.60"
 pylsp-mypy = ">=0.7.0"
 pylsp-rope = ">=0.1.17"
 python-lsp-isort = ">=0.2.0"
+python-lsp-server = { extras = ["all"], version = ">=1.12.2" }
+ruff-lsp = ">=0.0.62"
 
 [tool.poetry.group.tests.dependencies]
+coverage = { extras = ["toml"], version = ">=7.7.0" }
 pytest = "7.4.4"
-xdoctest = ">=1.2.0"
-pytest-lazy-fixture = ">=0.6.3"
 pytest-codeblocks = ">=0.17.0"
-pytest-mock = ">=3.14.0"
 pytest-cov = ">=6.0.0"
+pytest-lazy-fixture = ">=0.6.3"
+pytest-mock = ">=3.14.0"
 pytest-sugar = ">=1.0.0"
 pytest-watcher = ">=0.4.3"
-coverage = { version = ">=7.6.10", extras = ["toml"] }
+xdoctest = ">=1.2.0"
+
+[tool.codespell]
+skip = ["poetry.lock", "./src/*/input.txt"]
 
 [tool.commitizen]
 allowed_prefixes = ["Merge", "Initial"]
+
+[tool.coverage.run]
+omit = ["*/__init__.py"]
+
+[tool.deptry.per_rule_ignores]
+DEP004 = ["pytest"]
 
 [tool.isort]
 color_output = true
@@ -67,6 +75,12 @@ show_error_codes = true
 strict = true
 warn_unused_configs = true
 
+[tool.pytest.ini_options]
+addopts = ["--color=yes", "--import-mode=importlib", "--xdoc", "-l", "-rx", "-vv"]
+python_files = ["main.py", "part_01.py", "part_02.py"]
+python_functions = "test_*"
+testpaths = ["."]
+
 [tool.ruff]
 line-length = 100
 target-version = "py313"
@@ -78,49 +92,32 @@ select = ["ALL"]
 [tool.ruff.lint.isort]
 required-imports = ["from __future__ import annotations"]
 
-[tool.codespell]
-skip = ["poetry.lock", "./src/*/input.txt"]
-
-[tool.deptry.per_rule_ignores]
-DEP004 = ["pytest"]
-
-[tool.pytest.ini_options]
-addopts = ["--color=yes", "--import-mode=importlib", "--xdoc", "-l", "-rx", "-vv"]
-python_files = ["main.py", "part_01.py", "part_02.py"]
-python_functions = "test_*"
-testpaths = ["."]
-
-[tool.coverage.run]
-omit = ["*/__init__.py"]
-
 [tool.poe]
 poetry_command = ""
 
 [tool.poe.tasks.format]
 help = "Run formatters"
-args = { dir = { options = ["--directory", "-d"], default = ".", help = "Target directory" } }
 sequence = [
-  { shell = "find . -type f -name '*.py' ! -path './.venv/*' | xargs pyupgrade --py313-plus", help = "Run annotations formatter" },
-  { shell = "isort ${dir}", help = "Run imports formatter" },
-  { shell = "ruff format ${dir}", help = "Run code formatter" }
+  { help = "Run annotations formatter", shell = "find . -type f -name '*.py' ! -path './.venv/*' | xargs pyupgrade --py313-plus" },
+  { help = "Run annotations formatter", shell = "find tests -type f -name '*.py' | xargs pyupgrade --py313-plus" },
+  { help = "Run imports formatter", shell = "isort ." },
+  { help = "Run code formatter", shell = "ruff format ." }
 ]
 
 [tool.poe.tasks.lint]
 help = "Run linters"
-args = { dir = { options = ["--directory", "-d"], default = ".", help = "Target directory" } }
 sequence = [
-  { shell = "deptry ${dir}", help = "Run dependencies linter" },
-  { shell = "mypy ${dir}", help = "Run types linter" },
-  { shell = "ruff check ${dir}", help = "Run code linter" },
-  { shell = "codespell ${dir}", help = "Run spell linter" },
-  { shell = "cz check --rev-range .", help = "Run commits linter" }
+  { help = "Run dependencies linter", shell = "deptry ." },
+  { help = "Run types linter", shell = "mypy ." },
+  { help = "Run code linter", shell = "ruff check ." },
+  { help = "Run spell linter", shell = "codespell ." },
+  { help = "Run commits linter", shell = "cz check --rev-range ." }
 ]
 
 [tool.poe.tasks.tests]
 help = "Run tests"
-args = { dir = { options = ["--directory", "-d"], default = ".", help = "Target directory" } }
-shell = "pytest ${dir}"
+shell = "pytest ."
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
