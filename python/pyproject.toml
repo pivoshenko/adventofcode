@@ -9,10 +9,7 @@ dependencies = []
 
 [dependency-groups]
 dev = ["ipdb>=0.13.13", "ipython>=9.4.0", "poethepoet>=0.36.0", "watchdog>=6.0.0"]
-formatters = [
-    "pyupgrade>=3.20.0",
-    "ruff>=0.12.4",
-]
+formatters = ["pyupgrade>=3.20.0", "ruff>=0.12.4"]
 linters = ["commitizen>=4.8.3", "mypy>=1.17.0", "ruff>=0.12.4"]
 tests = [
   "pytest>=8.4.1",
@@ -58,7 +55,7 @@ lines-between-types = 1
 required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint]
-ignore = ["B023", "D103", "FIX", "I001", "INP001", "PLR2004", "S101", "T201", "TD"]
+ignore = ["B023", "D103", "D203", "D213", "COM812", "FIX", "I001", "INP001", "PLR2004", "S101", "T201", "TD"]
 select = ["ALL"]
 
 [tool.poe]
@@ -68,7 +65,6 @@ poetry_command = ""
 help = "Run formatters"
 sequence = [
   { help = "Run annotations formatter", shell = "find . -type f -name '*.py' ! -path './.venv/*' | xargs uv run pyupgrade --py313-plus" },
-  { help = "Run annotations formatter", shell = "find tests -type f -name '*.py' | xargs uv run pyupgrade --py313-plus" },
   { help = "Run code formatter", shell = "uv run ruff format ." }
 ]
 
