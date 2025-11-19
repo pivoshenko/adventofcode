@@ -9,7 +9,7 @@ dependencies = []
 
 [dependency-groups]
 dev = ["ipdb>=0.13.13", "ipython>=9.7.0", "poethepoet>=0.37.0", "watchdog>=6.0.0"]
-formatters = ["pyupgrade>=3.21.1", "ruff>=0.14.5"]
+formatters = ["pyupgrade>=3.21.2", "ruff>=0.14.5"]
 linters = ["commitizen>=4.10.0", "mypy>=1.18.2", "ruff>=0.14.5"]
 tests = [
   "pytest>=9.0.1",
