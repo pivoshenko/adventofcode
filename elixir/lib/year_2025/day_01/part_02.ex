@@ -26,19 +26,22 @@ content =
   end)
   |> Enum.unzip()
 
-answer =
-  Enum.zip(directions, rotations)
-  |> Enum.reduce({50, []}, fn {direction, rotation}, {dial_position, dial_positions} ->
-    dial_position =
-      case direction do
-        "L" -> dial_position - rotation
-        "R" -> dial_position + rotation
-      end
-      |> Integer.mod(100)
+step = fn
+  "R" -> 1
+  "L" -> -1
+end
 
-    {dial_position, [dial_position | dial_positions]}
+{_dial_position, answer} =
+  Enum.reduce(Enum.zip(directions, rotations), {50, 0}, fn {direction, rotation},
+                                                           {dial_position, count} ->
+    {dial_position, count} =
+      Enum.reduce(1..rotation, {dial_position, count}, fn _, {position, count} ->
+        position = Integer.mod(position + step.(direction), 100)
+        count = if position == 0, do: count + 1, else: count
+        {position, count}
+      end)
+
+    {dial_position, count}
   end)
-  |> then(fn {_dial_position, dial_positions} -> dial_positions end)
-  |> Enum.count(fn dial_position -> dial_position == 0 end)
 
 IO.inspect(answer)
