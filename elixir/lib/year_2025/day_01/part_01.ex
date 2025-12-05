@@ -1,23 +1,12 @@
 # Day 1: Secret Entrance (#1).
 # https://adventofcode.com/2025/day/1
 
-{options, _, _} =
-  OptionParser.parse(System.argv(),
-    strict: [filepath: :string],
-    aliases: [f: :filepath]
-  )
+filepath = "../data/examples/year_2025/day_01.txt"
 
 content =
-  case options[:filepath] do
-    nil ->
-      IO.puts("Error: --filepath is required")
-      System.halt(1)
-
-    filepath ->
-      filepath
-      |> File.read!()
-      |> String.split("\n", trim: true)
-  end
+  filepath
+  |> File.read!()
+  |> String.split("\n", trim: true)
 
 {directions, rotations} =
   Enum.map(content, fn line ->
