@@ -1,4 +1,4 @@
-filepath = "../data/examples/year_2025/day_03.txt"
+filepath = "../data/inputs/year_2025/day_03.txt"
 
 # Function to find max k-digit number from a digit list
 pick_k_digits = fn digits, k ->

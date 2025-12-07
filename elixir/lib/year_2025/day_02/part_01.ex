@@ -1,7 +1,7 @@
 # Day 2: Gift Shop (#1).
 # https://adventofcode.com/2025/day/2
 
-filepath = "../data/examples/year_2025/day_02.txt"
+filepath = "../data/inputs/year_2025/day_02.txt"
 
 content =
   filepath
