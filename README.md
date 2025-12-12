@@ -5,7 +5,10 @@
     <img alt="aoc" src="https://img.shields.io/badge/Advent%20of%20Code-FFC93C?style=flat-square&logo=adventofcode&logoColor=000">
   </a>
   <a href="https://adventofcode.com/2024">
-    <img alt="2024" src="https://img.shields.io/badge/2024-★_43-24273A?style=flat-square&logo=adventofcode&labelColor=0A6847">
+    <img alt="2024" src="https://img.shields.io/badge/2024-★_43/50-24273A?style=flat-square&logo=adventofcode&labelColor=0A6847">
+  </a>
+  <a href="https://adventofcode.com/2025">
+    <img alt="2025" src="https://img.shields.io/badge/2025-★_18/24-24273A?style=flat-square&logo=adventofcode&labelColor=0A6847">
   </a>
 </p>
 
