@@ -37,8 +37,20 @@ You don't need a computer science background to participate - just a little prog
 
 ### Elixir
 
-| Day | Part #1 Performance | Part #2 Performance |
-| --- | ------------------- | ------------------- |
+| Day                                                     | Part #1 Performance | Part #2 Performance |
+| ------------------------------------------------------- | ------------------- | ------------------- |
+| [#01 Secret Entrance](elixir/lib/year_2025/day_01/)     | 195.9 ms ± 3.9 ms   | 202.6 ms ± 4.3 ms   |
+| [#02 Gift Shop](elixir/lib/year_2025/day_02/)           | 1.733 s ± 0.096 s   | 1.661 s ± 0.027 s   |
+| [#03 Lobby](elixir/lib/year_2025/day_03/)               | 203.6 ms ± 14.9 ms  | 202.9 ms ± 6.9 ms   |
+| [#04 Printing Department](elixir/lib/year_2025/day_04/) | 212.8 ms ± 3.2 ms   | 503.9 ms ± 36.7 ms  |
+| [#05 Cafeteria](elixir/lib/year_2025/day_05/)           | 200.0 ms ± 3.6 ms   | NA                  |
+| [#06 Trash Compactor](elixir/lib/year_2025/day_06/)     | 203.6 ms ± 8.2 ms   | NA                  |
+| [#07 Laboratories](elixir/lib/year_2025/day_07/)        | 234.7 ms ± 9.4 ms   | NA                  |
+| [#08 Playground](elixir/lib/year_2025/day_08/)          | 456.8 ms ± 10.7 ms  | 470.0 ms ± 20.1 ms  |
+| [#09 Movie Theater](elixir/lib/year_2025/day_09/)       | 200.0 ms ± 3.6 ms   | NA                  |
+| [#10 Light Machine](elixir/lib/year_2025/day_10/)       | 224.4 ms ± 6.4 ms   | NA                  |
+| [#11 Reactor](elixir/lib/year_2025/day_11/)             | 200.5 ms ± 4.2 ms   | NA                  |
+| [#12 Christmas Tree Farm](elixir/lib/year_2025/day_12/) | 201.0 ms ± 3.2 ms   | NA                  |
 
 ## [2024](https://adventofcode.com/2024)
 
