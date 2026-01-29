@@ -9,26 +9,18 @@ dependencies = []
 
 [dependency-groups]
 dev = ["ipdb>=0.13.13", "ipython>=9.9.0", "poethepoet>=0.40.0", "watchdog>=6.0.0"]
-formatters = ["pyupgrade>=3.21.2", "ruff>=0.14.11"]
-linters = ["commitizen>=4.11.0", "mypy>=1.19.1", "ruff>=0.14.11"]
+formatters = ["pyupgrade>=3.21.2", "ruff>=0.14.14"]
+linters = ["commitizen>=4.12.1", "ruff>=0.14.14", "ty>=0.0.14"]
 tests = [
   "pytest>=9.0.2",
   "pytest-lazy-fixture>=0.6.3",
   "pytest-mock>=3.15.1",
   "pytest-sugar>=1.1.1",
-  "pytest-watcher>=0.6.2"
+  "pytest-watcher>=0.6.3"
 ]
 
 [tool.commitizen]
 allowed_prefixes = ["Merge", "Initial"]
-
-[tool.mypy]
-explicit_package_bases = true
-namespace_packages = true
-python_version = "3.13"
-show_error_codes = true
-strict = true
-warn_unused_configs = true
 
 [tool.pytest.ini_options]
 addopts = ["--color=yes", "--import-mode=importlib", "-l", "-rx", "-vv"]
@@ -71,7 +63,7 @@ sequence = [
 [tool.poe.tasks.lint]
 help = "Run linters"
 sequence = [
-  { help = "Run types linter", shell = "uv run mypy ." },
+  { help = "Run types linter", shell = "uv run ty check ." },
   { help = "Run code linter", shell = "uv run ruff check ." },
   { help = "Run commits linter", shell = "uv run cz check --rev-range ." }
 ]

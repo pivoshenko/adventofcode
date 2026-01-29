@@ -30,7 +30,7 @@ def run(input_data: str) -> int:
 
     for machine_params in machines_params:
         a_x, a_y, b_x, b_y, p_x, p_y = machine_params
-        min_cost = float("inf")
+        min_cost: int | None = None
         is_solved = False
 
         for a_press in range(max_tokens):
@@ -39,12 +39,13 @@ def run(input_data: str) -> int:
                 c_y = a_y * a_press + b_y * b_press
                 if c_x == p_x and c_y == p_y:
                     curr_cost = a_press * a_press_cost + b_press * b_press_cost
-                    if curr_cost < min_cost:
+                    if min_cost is None or curr_cost < min_cost:
                         min_cost = curr_cost
                         is_solved = True
 
         if is_solved:
-            total_cost += min_cost  # type: ignore[assignment]
+            assert min_cost is not None
+            total_cost += min_cost
 
     return total_cost
 
