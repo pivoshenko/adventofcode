@@ -50,7 +50,7 @@ def count_distinct_trails(start: tuple[int, int], grid: list[list[int]]) -> int:
             next_height = grid[ny][nx]
             if next_height == current_height + 1:
                 new_path = (*path, next_pos)
-                queue.append((next_pos, new_path))  # type: ignore[arg-type]
+                queue.append((next_pos, new_path))
 
     return len(distinct_paths)
 

@@ -18,9 +18,9 @@ def run(input_data: str) -> str:
         network[conn[0]].append(conn[1])
         network[conn[1]].append(conn[0])
 
-    cliques = {(node,) for node in network}
+    cliques: set[tuple[str, ...]] = {(node,) for node in network}
 
-    updated_cliques = set()
+    updated_cliques: set[tuple[str, ...]] = set()
     for clique in cliques:
         new_clique = list(clique)
         for node in clique:
@@ -32,7 +32,7 @@ def run(input_data: str) -> str:
 
         updated_cliques.add(tuple(sorted(new_clique)))
 
-    largest_clique = max(updated_cliques, key=len)
+    largest_clique: tuple[str, ...] = max(updated_cliques, key=len)  # type: ignore[invalid-assignment]
 
     return ",".join(sorted(largest_clique))
 

@@ -10,21 +10,21 @@ import argparse
 
 
 def run(input_data: str) -> int:  # noqa: C901, PLR0912
-    blocks: list[int | str] = []
+    blocks: list[int] = []
     file_blocks_len: list[tuple[int, int]] = []
 
     file_index = 0
-    empty_block = "."
+    empty_block = -1
 
     for index, block_len in enumerate(input_data.replace("\n", "")):
         if (index + 1) % 2 != 0 or index == 0:
             block = file_index
             file_index += 1
         else:
-            block = empty_block  # type: ignore[assignment]
+            block = empty_block
 
         exp_blocks = [block for _ in range(int(block_len))]
-        if block != empty_block:  # type: ignore[comparison-overlap]
+        if block != empty_block:
             file_blocks_len.append((block, len(exp_blocks)))
 
         blocks.extend(exp_blocks)
@@ -62,8 +62,8 @@ def run(input_data: str) -> int:  # noqa: C901, PLR0912
                 sorted_blocks[i] = file_id
 
     checksum = 0
-    for index, block in enumerate(sorted_blocks):  # type: ignore[assignment]
-        if block != empty_block:  # type: ignore[comparison-overlap]
+    for index, block in enumerate(sorted_blocks):
+        if block != empty_block:
             checksum += block * index
 
     return checksum
