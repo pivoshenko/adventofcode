@@ -3,7 +3,7 @@ name = "adventofcode"
 description = "adventofcode"
 version = "0.0.0"
 license = { text = "MIT" }
-authors = [{ name = "Volodymyr Pivoshenko", email = "volodymyr.pivoshenko@gmail.com" }]
+authors = [{ name = "Volodymyr Pivoshenko", email = "contact@pivoshenko.dev" }]
 requires-python = ">=3.13"
 dependencies = []
 
