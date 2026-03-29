@@ -6,7 +6,7 @@ test: test-py test-ex
 
 update:
   cd python && uv lock --upgrade
-  uvx uv-upsync python/pyproject.toml
+  cd python && uvx uv-upsync
 
 format-py:
   find python/src -type f -name '*.py' | xargs uv run --project python pyupgrade --py313-plus
