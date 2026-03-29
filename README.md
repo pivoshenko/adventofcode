@@ -18,13 +18,6 @@
   </a>
 </p>
 
-- [My Advent of Code Solutions](#my-advent-of-code-solutions)
-  - [Overview](#overview)
-  - [2025](#2025)
-    - [Elixir](#elixir)
-  - [2024](#2024)
-    - [Python](#python)
-
 ## Overview
 
 Advent of Code is an Advent calendar of small programming puzzles for a variety of skill levels that can be solved in any programming language you like. People use them for interview prep, company training, university coursework, practice problems, a speed contest, or to challenge each other.
