@@ -1,3 +1,21 @@
+format-py:
+    find python/src -type f -name '*.py' | xargs uv run --project python pyupgrade --py313-plus
+    uv run --project python ruff format python
+
+lint-py:
+    uv run --project python ty check python
+    uv run --project python ruff check python
+    uv run --project python cz check --rev-range .
+
+test-py:
+    uv run --project python pytest python
+
+format-ex:
+  cd elixir && mix format
+
+test-ex:
+  cd elixir && mix test
+
 run-ex YEAR DAY PART:
   hyperfine --warmup 3 "cd elixir && elixir lib/year_{{ YEAR }}/day_{{ DAY }}/part_{{ PART }}.ex"
 

@@ -1,6 +1,6 @@
 # My Advent of Code Solutions
 
-<p align="center">
+<p align="left">
   <a>
     <img alt="aoc" src="https://img.shields.io/badge/Advent%20of%20Code-FFC93C?style=flat-square&logo=adventofcode&logoColor=000">
   </a>
@@ -10,9 +10,6 @@
   <a href="https://adventofcode.com/2025">
     <img alt="2025" src="https://img.shields.io/badge/2025-★_18/24-24273A?style=flat-square&logo=adventofcode&labelColor=0A6847">
   </a>
-</p>
-
-<p align="center">
   <a href="https://stand-with-ukraine.pp.ua/">
     <img alt="StandWithUkraine" src="https://img.shields.io/badge/Support-Ukraine-FFC93C?style=flat-square&labelColor=07689F">
   </a>
