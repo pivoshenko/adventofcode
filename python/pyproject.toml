@@ -8,16 +8,10 @@ requires-python = ">=3.13"
 dependencies = []
 
 [dependency-groups]
-dev = ["ipdb~=0.13.13", "ipython~=9.12.0", "poethepoet~=0.42.1", "watchdog~=6.0.0"]
+dev = ["ipdb~=0.13.13", "ipython~=9.12.0", "watchdog~=6.0.0"]
 formatters = ["pyupgrade~=3.21.2", "ruff~=0.15.8"]
 linters = ["commitizen~=4.13.9", "ruff~=0.15.8", "ty~=0.0.26"]
-tests = [
-  "pytest~=9.0.2",
-  "pytest-lazy-fixture~=0.6.3",
-  "pytest-mock~=3.15.1",
-  "pytest-sugar~=1.1.1",
-  "pytest-watcher~=0.6.3"
-]
+tests = ["pytest~=9.0.2", "pytest-mock~=3.15.1", "pytest-sugar~=1.1.1", "pytest-watcher~=0.6.3"]
 
 [tool.commitizen]
 allowed_prefixes = ["Merge", "Initial"]
@@ -49,25 +43,3 @@ required-imports = ["from __future__ import annotations"]
 [tool.ruff.lint]
 ignore = ["B023", "D103", "D203", "D213", "COM812", "FIX", "I001", "INP001", "PLR2004", "S101", "T201", "TD"]
 select = ["ALL"]
-
-[tool.poe]
-poetry_command = ""
-
-[tool.poe.tasks.format]
-help = "Run formatters"
-sequence = [
-  { help = "Run annotations formatter", shell = "find . -type f -name '*.py' ! -path './.venv/*' | xargs uv run pyupgrade --py313-plus" },
-  { help = "Run code formatter", shell = "uv run ruff format ." }
-]
-
-[tool.poe.tasks.lint]
-help = "Run linters"
-sequence = [
-  { help = "Run types linter", shell = "uv run ty check ." },
-  { help = "Run code linter", shell = "uv run ruff check ." },
-  { help = "Run commits linter", shell = "uv run cz check --rev-range ." }
-]
-
-[tool.poe.tasks.tests]
-help = "Run tests"
-shell = "pytest ."
