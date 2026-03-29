@@ -1,3 +1,13 @@
+format: format-py format-ex
+
+lint: lint-py
+
+test: test-py test-ex
+
+update:
+  cd python && uv lock --upgrade
+  uvx uv-upsync python/pyproject.toml
+
 format-py:
   find python/src -type f -name '*.py' | xargs uv run --project python pyupgrade --py313-plus
   uv run --project python ruff format python
