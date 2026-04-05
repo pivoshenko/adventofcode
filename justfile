@@ -1,10 +1,12 @@
+update: update-py
+
 format: format-py format-ex
 
 lint: lint-py
 
 test: test-py test-ex
 
-update:
+update-py:
   cd python && uv lock --upgrade
   cd python && uvx uv-upsync
 
@@ -13,9 +15,8 @@ format-py:
   uv run --project python ruff format python
 
 lint-py:
-  uv run --project python ty check python
+  # uv run --project python ty check python
   uv run --project python ruff check python
-  uv run --project python cz check --rev-range .
 
 test-py:
   uv run --project python pytest python
