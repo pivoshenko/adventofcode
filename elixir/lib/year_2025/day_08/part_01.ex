@@ -97,7 +97,6 @@ circuit_sizes =
   |> Enum.frequencies()
   |> Map.values()
 
-
 top_3_sizes =
   circuit_sizes
   |> Enum.sort(:desc)
