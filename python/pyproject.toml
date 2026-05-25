@@ -9,8 +9,8 @@ dependencies = []
 
 [dependency-groups]
 dev = ["ipdb~=0.13.13", "ipython~=9.13.0", "watchdog~=6.0.0"]
-formatters = ["pyupgrade~=3.21.2", "ruff~=0.15.13"]
-linters = ["ruff~=0.15.13", "ty~=0.0.37"]
+formatters = ["pyupgrade~=3.21.2", "ruff~=0.15.14"]
+linters = ["ruff~=0.15.14", "ty~=0.0.39"]
 tests = ["pytest~=9.0.3", "pytest-mock~=3.15.1", "pytest-sugar~=1.1.1", "pytest-watcher~=0.6.3"]
 
 [tool.pytest.ini_options]
