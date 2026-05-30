@@ -12,6 +12,8 @@ trim_trailing_whitespace = true
 
 [*.{ex,exs}]
 indent_size = 4
+tab_width = 4
 
-[{*.py,*.pyi}]
+[{*.py,*.pyi,*.ipynb}]
 indent_size = 4
+tab_width = 4
