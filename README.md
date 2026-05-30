@@ -10,12 +10,6 @@
   <a href="https://adventofcode.com/2025">
     <img alt="2025" src="https://img.shields.io/badge/2025-★_18/24-24273A?style=flat-square&logo=adventofcode&labelColor=0A6847">
   </a>
-  <a href="https://www.python.org">
-    <img alt="Python" src="https://img.shields.io/badge/Python-3.13-4856CD?style=flat-square&logo=python&logoColor=white">
-  </a>
-  <a href="https://elixir-lang.org">
-    <img alt="Elixir" src="https://img.shields.io/badge/Elixir-1.19-4B275F?style=flat-square&logo=elixir&logoColor=white">
-  </a>
   <a href="https://stand-with-ukraine.pp.ua/">
     <img alt="StandWithUkraine" src="https://img.shields.io/badge/Support-Ukraine-FFC93C?style=flat-square&labelColor=07689F">
   </a>
@@ -31,7 +25,7 @@ You don't need a computer science background to participate - just a little prog
 
 ## Benchmarking
 
-Performance measured with [`hyperfine`](https://github.com/sharkdp/hyperfine) (3 warm-ups, file I/O and parsing included). Input used is the real puzzle input, not the example.
+Performance measured with [Hyperfine](https://github.com/sharkdp/hyperfine) (3 warm-ups, file I/O and parsing included). Input used is the real puzzle input, not the example.
 
 ## [2025](https://adventofcode.com/2025)
 
