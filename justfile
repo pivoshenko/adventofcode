@@ -7,7 +7,9 @@ format: format-py format-ex
 
 lint: lint-py
 
-check: lint test
+audit: audit-py audit-ex
+
+check: lint test audit
 
 test: test-py test-ex
 
@@ -26,11 +28,17 @@ lint-py:
 test-py:
     uv run --project python pytest python
 
+audit-py:
+    cd python && uv audit
+
 format-ex:
     cd elixir && mix format
 
 test-ex:
     cd elixir && mix test
+
+audit-ex:
+    cd elixir && mix hex.audit
 
 run-ex YEAR DAY PART:
     hyperfine --warmup 3 "cd elixir && elixir lib/year_{{ YEAR }}/day_{{ DAY }}/part_{{ PART }}.ex"
