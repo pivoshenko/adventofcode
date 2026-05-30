@@ -31,7 +31,7 @@ You don't need a computer science background to participate - just a little prog
 
 ## Benchmarking
 
-Performance measured with `hyperfine` (3 warm-ups, file I/O and parsing included). Input used is the real puzzle input, not the example.
+Performance measured with [`hyperfine`](https://github.com/sharkdp/hyperfine) (3 warm-ups, file I/O and parsing included). Input used is the real puzzle input, not the example.
 
 ## [2025](https://adventofcode.com/2025)
 
