@@ -1,6 +1,8 @@
 default:
     @just --list
 
+install: install-py install-ex
+
 update: update-py
 
 format: format-py format-ex
@@ -12,6 +14,9 @@ audit: audit-py audit-ex
 check: lint test audit
 
 test: test-py test-ex
+
+install-py:
+    cd python && uv sync --all-groups --all-extras
 
 update-py:
     cd python && uv lock --upgrade
@@ -30,6 +35,9 @@ test-py:
 
 audit-py:
     cd python && uv audit
+
+install-ex:
+    cd elixir && mix deps.get
 
 format-ex:
     cd elixir && mix format
