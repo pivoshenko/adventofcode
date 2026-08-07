@@ -8,10 +8,10 @@ requires-python = ">=3.13"
 dependencies = []
 
 [dependency-groups]
-dev = ["ipdb~=0.13.13", "ipython~=9.14.0", "watchdog~=6.0.0"]
-formatters = ["pyupgrade~=3.21.2", "ruff~=0.15.15"]
-linters = ["ruff~=0.15.15", "ty~=0.0.40"]
-tests = ["pytest~=9.0.3", "pytest-mock~=3.15.1", "pytest-sugar~=1.1.1", "pytest-watcher~=0.6.3"]
+dev = ["ipdb~=0.13.13", "ipython~=9.16.1", "watchdog~=6.0.0"]
+formatters = ["pyupgrade~=3.21.2", "ruff~=0.16.2"]
+linters = ["ruff~=0.16.2", "ty~=0.0.69"]
+tests = ["pytest~=9.1.1", "pytest-mock~=3.15.1", "pytest-sugar~=1.1.1", "pytest-watcher~=0.6.3"]
 
 [tool.pytest.ini_options]
 addopts = ["--color=yes", "--import-mode=importlib", "-l", "-rx", "-vv"]
