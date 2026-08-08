@@ -21,7 +21,7 @@ def find_guard(grid: list[list[str]], tile: str, obstacle: str) -> tuple[int, in
     return -1, -1, ""
 
 
-def move_guard(  # noqa: PLR0913
+def move_guard(  # noqa: PLR0913, PLR0917
     curr_guard_pos_x: int,
     curr_guard_pos_y: int,
     curr_guard_dir: str,
