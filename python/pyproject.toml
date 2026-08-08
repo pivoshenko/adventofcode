@@ -38,5 +38,5 @@ lines-between-types = 1
 required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.lint]
-ignore = ["B023", "D103", "D203", "D213", "COM812", "FIX", "I001", "INP001", "PLR2004", "S101", "T201", "TD"]
+ignore = ["B023", "CPY001", "D103", "D203", "D213", "COM812", "FIX", "I001", "INP001", "PLR2004", "S101", "T201", "TD"]
 select = ["ALL"]
