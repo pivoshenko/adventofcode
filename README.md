@@ -25,7 +25,7 @@
 
 ## Benchmarking
 
-Performance measured with [Hyperfine](https://github.com/sharkdp/hyperfine) (3 warm-ups, file I/O and parsing included). Input used is the real puzzle input, not the example.
+Performance measured with [Hyperfine](https://github.com/sharkdp/hyperfine) (3 warm-ups, file I/O and parsing included). Benchmarks run against the real puzzle input, not the example.
 
 ## [2025](https://adventofcode.com/2025)
 
