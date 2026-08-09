@@ -1,4 +1,4 @@
-# Day 10: Light Machine (#1).
+# Day 10: Light Machine (#1)
 # https://adventofcode.com/2025/day/10
 
 filepath = "../data/inputs/year_2025/day_10.txt"
@@ -99,7 +99,6 @@ find_all_solutions = fn matrix, num_vars ->
 
     all_solutions =
       if num_free == 0 do
-        # No free variables, compute single solution
         solution = List.duplicate(0, num_vars)
 
         result =

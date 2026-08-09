@@ -1,4 +1,4 @@
-# Day 5: Cafeteria (#1).
+# Day 5: Cafeteria (#1)
 # https://adventofcode.com/2025/day/5
 
 filepath = "../data/inputs/year_2025/day_05.txt"

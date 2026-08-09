@@ -1,16 +1,14 @@
 filepath = "../data/inputs/year_2025/day_03.txt"
 
-# Function to find max k-digit number from a digit list
+# Picks the largest k-digit number from a digit list
 pick_k_digits = fn digits, k ->
-  # Recursive helper to build the result
   pick_helper = fn pick_helper, remaining_digits, _start_idx, digits_needed, acc ->
     if digits_needed == 0 do
       acc
     else
-      # We can search up to position where we still have enough digits left
+      # Stop far enough back to leave a digit for every remaining slot
       search_end = length(remaining_digits) - digits_needed
 
-      # Find the maximum digit in valid range
       {max_digit, max_pos} =
         0..search_end
         |> Enum.reduce({-1, -1}, fn i, {best_digit, best_pos} ->
@@ -18,7 +16,6 @@ pick_k_digits = fn digits, k ->
           if d > best_digit, do: {d, i}, else: {best_digit, best_pos}
         end)
 
-      # Take digits after the selected position and continue
       new_remaining = Enum.drop(remaining_digits, max_pos + 1)
       pick_helper.(pick_helper, new_remaining, 0, digits_needed - 1, acc * 10 + max_digit)
     end

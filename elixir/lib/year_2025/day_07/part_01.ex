@@ -1,4 +1,4 @@
-# Day 7: Laboratories (#1).
+# Day 7: Laboratories (#1)
 # https://adventofcode.com/2025/day/7
 
 filepath = "../data/inputs/year_2025/day_07.txt"
@@ -32,7 +32,6 @@ defmodule Simulator do
   end
 
   def simulate(beams, grid, max_row, splits) do
-    # Move each beam down and check for splits
     {new_beams, new_splits} =
       beams
       |> Enum.reduce({[], splits}, fn {row, column}, {acc_beams, acc_splits} ->

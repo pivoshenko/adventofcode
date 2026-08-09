@@ -1,4 +1,4 @@
-# Day 11: Reactor (#1).
+# Day 11: Reactor (#1)
 # https://adventofcode.com/2025/day/11
 
 filepath = "../data/inputs/year_2025/day_11.txt"
