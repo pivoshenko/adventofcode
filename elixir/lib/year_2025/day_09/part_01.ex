@@ -1,4 +1,4 @@
-# Day 9: Movie Theater (#1).
+# Day 9: Movie Theater (#1)
 # https://adventofcode.com/2025/day/9
 
 filepath = "../data/inputs/year_2025/day_09.txt"

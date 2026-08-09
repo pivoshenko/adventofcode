@@ -1,4 +1,4 @@
-# Day 8: Playground (#1).
+# Day 8: Playground (#1)
 # https://adventofcode.com/2025/day/8
 
 filepath = "../data/inputs/year_2025/day_08.txt"
@@ -59,7 +59,6 @@ defmodule CircuitTrackerP1 do
     {root_b, parent} = find(parent, point_b)
 
     if root_a == root_b do
-      # Already in same circuit
       {parent, rank}
     else
       rank_a = Map.get(rank, root_a, 0)

@@ -1,4 +1,4 @@
-# Day 6: Trash Compactor (#1).
+# Day 6: Trash Compactor (#1)
 # https://adventofcode.com/2025/day/6
 
 filepath = "../data/inputs/year_2025/day_06.txt"

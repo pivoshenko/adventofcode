@@ -1,4 +1,4 @@
-# Day 12: Christmas Tree Farm (#1).
+# Day 12: Christmas Tree Farm (#1)
 # https://adventofcode.com/2025/day/12
 
 filepath = "../data/inputs/year_2025/day_12.txt"
