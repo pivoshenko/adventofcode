@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Advent of Code solutions, one language per year: **Python for 2024** (`python/src/year_2024/`), **Elixir for 2025** (`elixir/lib/year_2025/`). The two stacks share only the `data/` directory and the root `justfile`. `just` is the entry point for every task; recipes are suffixed `-py` / `-ex`, and the unsuffixed recipes (`install`, `format`, `test`, `audit`, `check`) fan out to both stacks (`lint` and `update` are Python-only).
+Advent of Code solutions, one language per year: **Python for 2024** (`python/src/year_2024/`), **Elixir for 2025** (`elixir/lib/year_2025/`). The two stacks share only the `data/` directory and the root `justfile`. `just` is the entry point for every task; recipes are suffixed `-py` / `-ex`, and the unsuffixed recipes (`install`, `format`, `test`, `check`) fan out to both stacks (`lint` and `update` are Python-only).
 
 ## Commands
 
@@ -13,7 +13,7 @@ Run from the repository root.
 ```sh
 just                          # list all recipes
 just install                  # uv sync --all-groups --all-extras (python) + mix deps.get (elixir)
-just check                    # lint + test + audit, both stacks
+just check                    # lint + test, both stacks
 just format                   # pyupgrade --py313-plus + ruff format (python), mix format (elixir)
 just lint                     # ruff check (ty check is commented out in lint-py)
 just test                     # pytest (python) + mix test (elixir)
@@ -40,8 +40,8 @@ uv run --project python python/src/year_2024/day_01/part_01.py -f data/examples/
 cd elixir && elixir lib/year_2025/day_01/part_01.ex
 
 # benchmark via hyperfine (3 warm-ups); args are YEAR DAY PART, zero-padded
-just run-ex 2025 01 01
-just run-bench-ex 2025            # hardcoded list of solved day/part pairs - extend it when adding days
+just benchmark-ex-solution 2025 01 01
+just benchmark-ex-year 2025            # hardcoded list of solved day/part pairs - extend it when adding days
 ```
 
 There is no CI; `just check` is the only gate.
@@ -77,7 +77,7 @@ Ruff runs with `select = ["ALL"]`, `fix = true`, `unsafe-fixes = true`, `line-le
 
 ## Elixir Conventions
 
-Elixir solutions are **plain scripts, not modules** - no `defmodule`, top-level pipelines ending in `IO.inspect(answer)`. `mix.exs` exists only so `mix format` / `mix hex.audit` have a project; there are no deps and no `test/` directory, so `just test-ex` collects nothing.
+Elixir solutions are **plain scripts, not modules** - no `defmodule`, top-level pipelines ending in `IO.inspect(answer)`. `mix.exs` exists only so `mix format` has a project; there are no deps and no `test/` directory, so `just test-ex` collects nothing.
 
 Each file opens with two `#` comments (`# Day N: Title (#P)` and the puzzle URL) and hardcodes its input path:
 

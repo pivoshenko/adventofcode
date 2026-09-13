@@ -1,71 +1,62 @@
 default:
     @just --list
 
-install: install-py install-ex
+install: install-ex install-py
 
-update: update-py
-
-format: format-py format-ex
-
-lint: lint-py
-
-audit: audit-py audit-ex
-
-check: lint test audit
-
-test: test-py test-ex
+install-ex:
+    cd elixir && mix deps.get
 
 install-py:
     cd python && uv sync --all-groups --all-extras
 
-update-py:
-    cd python && uv lock --upgrade
-    cd python && uvx uv-upsync
+format: format-ex format-py
+
+format-ex:
+    cd elixir && mix format
 
 format-py:
     find python/src -type f -name '*.py' | xargs uv run --project python pyupgrade --py313-plus
     uv run --project python ruff format python
 
+lint: lint-py
+
 lint-py:
-    # uv run --project python ty check python
     uv run --project python ruff check python
 
-test-py:
-    uv run --project python pytest python
-
-audit-py:
-    cd python && uv audit
-
-install-ex:
-    cd elixir && mix deps.get
-
-format-ex:
-    cd elixir && mix format
+test: test-ex test-py
 
 test-ex:
     cd elixir && mix test
 
-audit-ex:
-    cd elixir && mix hex.audit
+test-py:
+    uv run --project python pytest python
 
-run-ex YEAR DAY PART:
+check: lint test
+
+update: update-py
+
+update-py:
+    cd python && uv lock --upgrade
+    cd python && uvx uv-upsync
+
+benchmark-ex-solution YEAR DAY PART:
     hyperfine --warmup 3 "cd elixir && elixir lib/year_{{ YEAR }}/day_{{ DAY }}/part_{{ PART }}.ex"
 
-run-bench-ex YEAR:
-    just run-ex {{ YEAR }} 01 01
-    just run-ex {{ YEAR }} 01 02
-    just run-ex {{ YEAR }} 02 01
-    just run-ex {{ YEAR }} 02 02
-    just run-ex {{ YEAR }} 03 01
-    just run-ex {{ YEAR }} 03 02
-    just run-ex {{ YEAR }} 04 01
-    just run-ex {{ YEAR }} 04 02
-    just run-ex {{ YEAR }} 05 01
-    just run-ex {{ YEAR }} 06 01
-    just run-ex {{ YEAR }} 07 01
-    just run-ex {{ YEAR }} 08 01
-    just run-ex {{ YEAR }} 08 02
-    just run-ex {{ YEAR }} 09 01
-    just run-ex {{ YEAR }} 10 01
-    just run-ex {{ YEAR }} 11 01
-    just run-ex {{ YEAR }} 12 01
+benchmark-ex-year YEAR:
+    just benchmark-ex-solution {{ YEAR }} 01 01
+    just benchmark-ex-solution {{ YEAR }} 01 02
+    just benchmark-ex-solution {{ YEAR }} 02 01
+    just benchmark-ex-solution {{ YEAR }} 02 02
+    just benchmark-ex-solution {{ YEAR }} 03 01
+    just benchmark-ex-solution {{ YEAR }} 03 02
+    just benchmark-ex-solution {{ YEAR }} 04 01
+    just benchmark-ex-solution {{ YEAR }} 04 02
+    just benchmark-ex-solution {{ YEAR }} 05 01
+    just benchmark-ex-solution {{ YEAR }} 06 01
+    just benchmark-ex-solution {{ YEAR }} 07 01
+    just benchmark-ex-solution {{ YEAR }} 08 01
+    just benchmark-ex-solution {{ YEAR }} 08 02
+    just benchmark-ex-solution {{ YEAR }} 09 01
+    just benchmark-ex-solution {{ YEAR }} 10 01
+    just benchmark-ex-solution {{ YEAR }} 11 01
+    just benchmark-ex-solution {{ YEAR }} 12 01
