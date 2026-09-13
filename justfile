@@ -51,7 +51,7 @@ audit-ex:
 run-ex YEAR DAY PART:
     hyperfine --warmup 3 "cd elixir && elixir lib/year_{{ YEAR }}/day_{{ DAY }}/part_{{ PART }}.ex"
 
-bench-ex YEAR:
+run-bench-ex YEAR:
     just run-ex {{ YEAR }} 01 01
     just run-ex {{ YEAR }} 01 02
     just run-ex {{ YEAR }} 02 01
