@@ -7,7 +7,7 @@ install-ex:
     cd elixir && mix deps.get
 
 install-py:
-    cd python && uv sync --all-groups --all-extras
+    cd python && uv sync --all-groups --all-extras -U
 
 format: format-ex format-py
 
