@@ -32,7 +32,8 @@ def get_neighbors(x: int, y: int, grid: list[list[int]]) -> Iterator[tuple[int, 
 
 def count_distinct_trails(start: tuple[int, int], grid: list[list[int]]) -> int:
     distinct_paths = set()
-    queue = collections.deque([(start, (start,))])
+    queue = collections.deque[tuple[tuple[int, int], tuple[tuple[int, int], ...]]]()
+    queue.append((start, (start,)))
 
     while queue:
         (x, y), path = queue.popleft()
