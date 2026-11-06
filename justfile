@@ -7,7 +7,7 @@ install-ex:
     cd elixir && mix deps.get
 
 install-py:
-    cd python && uv sync --all-groups --all-extras -U
+    cd python && uv sync --all-groups --all-extras
 
 format: format-ex format-py
 
@@ -15,21 +15,22 @@ format-ex:
     cd elixir && mix format
 
 format-py:
-    uv run --project python ruff check --fix python
-    uv run --project python ruff format python
+    cd python && uv run ruff check --fix .
+    cd python && uv run ruff format .
 
 lint: lint-py
 
 lint-py:
-    uv run --project python ruff check python
+    cd python && uv run ruff check .
+    cd python && uv run ty check .
 
 test: test-ex test-py
 
 test-ex:
-    cd elixir && mix test
+    @cd elixir && ([ -f .no-tests ] && echo "skipping (.no-tests sentinel)" || mix test)
 
 test-py:
-    uv run --project python pytest python
+    @cd python && ([ -f .no-tests ] && echo "skipping (.no-tests sentinel)" || uv run pytest .)
 
 check: lint test
 
