@@ -1,42 +1,76 @@
 [project]
 name = "adventofcode"
-description = "adventofcode"
 version = "0.0.0"
+description = "adventofcode"
 license = { text = "MIT" }
 authors = [{ name = "Volodymyr Pivoshenko", email = "contact@pivoshenko.dev" }]
 requires-python = ">=3.13"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
 dependencies = []
 
 [dependency-groups]
-dev = ["ipdb~=0.13.13", "ipython~=9.18.1", "watchdog~=7.1.0"]
+dev = ["ipdb~=0.13.13", "ipython~=9.18.1", "uv-upsync~=2.4.2", "watchdog~=7.1.0"]
 formatters = ["ruff~=0.17.4"]
 linters = ["ruff~=0.17.4", "ty~=0.0.99"]
-tests = ["pytest~=9.2.0", "pytest-mock~=3.17.0", "pytest-sugar~=1.1.1", "pytest-watcher~=0.6.3"]
-
-[tool.pytest.ini_options]
-addopts = ["--color=yes", "--import-mode=importlib", "-l", "-rx", "-vv"]
-python_files = ["main.py", "part_01.py", "part_02.py"]
-python_functions = "test_*"
-testpaths = ["."]
+tests = [
+  "coverage[toml]~=7.17.2",
+  "pytest~=9.2.0",
+  "pytest-cov~=7.1.0",
+  "pytest-mock~=3.17.0",
+  "pytest-sugar~=1.1.1",
+  "pytest-watcher~=0.6.3",
+]
 
 [tool.ruff]
-fix = true
-line-length = 100
-unsafe-fixes = true
 target-version = "py313"
+line-length = 100
+fix = true
+unsafe-fixes = true
+format.quote-style = "double"
+format.docstring-code-format = true
+lint.select = ["ALL"]
+lint.ignore = [
+  "B023",
+  "COM812",
+  "CPY001",
+  "D101",
+  "D102",
+  "D103",
+  "D107",
+  "D203",
+  "D213",
+  "FIX",
+  "I001",
+  "INP001",
+  "PLR2004",
+  "S101",
+  "T201",
+  "TD",
+]
+lint.isort.force-single-line = true
+lint.isort.from-first = false
+lint.isort.length-sort-straight = true
+lint.isort.lines-after-imports = 2
+lint.isort.lines-between-types = 1
+lint.isort.required-imports = ["from __future__ import annotations"]
 
-[tool.ruff.format]
-docstring-code-format = true
-quote-style = "double"
+[tool.ty]
+environment.python-version = "3.13"
 
-[tool.ruff.lint.isort]
-force-single-line = true
-from-first = false
-length-sort-straight = true
-lines-after-imports = 2
-lines-between-types = 1
-required-imports = ["from __future__ import annotations"]
+[tool.pytest]
+ini_options.testpaths = ["."]
+ini_options.python_files = ["main.py", "part_01.py", "part_02.py"]
+ini_options.python_functions = "test_*"
+ini_options.addopts = [
+  "--color=yes",
+  "--cov=src",
+  "--cov-report=term-missing",
+  "--import-mode=importlib",
+]
 
-[tool.ruff.lint]
-ignore = ["B023", "CPY001", "D103", "D203", "D213", "COM812", "FIX", "I001", "INP001", "PLR2004", "S101", "T201", "TD"]
-select = ["ALL"]
+[tool.coverage]
+run.omit = ["*/__init__.py"]

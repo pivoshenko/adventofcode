@@ -38,7 +38,7 @@ update: update-py
 
 update-py:
     cd python && uv lock --upgrade
-    cd python && uvx uv-upsync
+    cd python && uv run uv-upsync
 
 benchmark-ex-solution YEAR DAY PART:
     hyperfine --warmup 3 "cd elixir && elixir lib/year_{{ YEAR }}/day_{{ DAY }}/part_{{ PART }}.ex"
