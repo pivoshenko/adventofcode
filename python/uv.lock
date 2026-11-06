@@ -14,7 +14,6 @@ dev = [
     { name = "watchdog" },
 ]
 formatters = [
-    { name = "pyupgrade" },
     { name = "ruff" },
 ]
 linters = [
@@ -36,10 +35,7 @@ dev = [
     { name = "ipython", specifier = "~=9.18.1" },
     { name = "watchdog", specifier = "~=7.1.0" },
 ]
-formatters = [
-    { name = "pyupgrade", specifier = "~=3.22.0" },
-    { name = "ruff", specifier = "~=0.17.4" },
-]
+formatters = [{ name = "ruff", specifier = "~=0.17.4" }]
 linters = [
     { name = "ruff", specifier = "~=0.17.4" },
     { name = "ty", specifier = "~=0.0.99" },
@@ -326,18 +322,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pyupgrade"
-version = "3.22.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "tokenize-rt" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/3b/729d6a29209ff0d16726f3623177c7cfb23f190d3c25bb61e651dd55d371/pyupgrade-3.22.0.tar.gz", hash = "sha256:6889a7be7f0d0ea3119789bc50086a008a91ed6c46005a030f8928b501550425", size = 49937, upload-time = "2026-10-09T15:15:25.004Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/47/a3/222eacd24aac6e87b337c5f3961cb120e6b79233b6798248fb1af362f613/pyupgrade-3.22.0-py2.py3-none-any.whl", hash = "sha256:98c87952345cca4dec6589436b9c1e4b2e8c09617f41aa1582fb448728201024", size = 71368, upload-time = "2026-10-09T15:15:23.976Z" },
-]
-
-[[package]]
 name = "ruff"
 version = "0.17.4"
 source = { registry = "https://pypi.org/simple" }
@@ -383,15 +367,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/46/79/cf31d7a93a8fdc6aa0fbb665be84426a8c5a557d9240b6239e9e11e35fc5/termcolor-3.3.0.tar.gz", hash = "sha256:348871ca648ec6a9a983a13ab626c0acce02f515b9e1983332b17af7979521c5", size = 14434, upload-time = "2025-12-29T12:55:21.882Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/33/d1/8bb87d21e9aeb323cc03034f5eaf2c8f69841e40e4853c2627edf8111ed3/termcolor-3.3.0-py3-none-any.whl", hash = "sha256:cf642efadaf0a8ebbbf4bc7a31cec2f9b5f21a9f726f4ccbb08192c9c26f43a5", size = 7734, upload-time = "2025-12-29T12:55:20.718Z" },
-]
-
-[[package]]
-name = "tokenize-rt"
-version = "6.2.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/69/ed/8f07e893132d5051d86a553e749d5c89b2a4776eb3a579b72ed61f8559ca/tokenize_rt-6.2.0.tar.gz", hash = "sha256:8439c042b330c553fdbe1758e4a05c0ed460dbbbb24a606f11f0dee75da4cad6", size = 5476, upload-time = "2025-05-23T23:48:00.035Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/33/f0/3fe8c6e69135a845f4106f2ff8b6805638d4e85c264e70114e8126689587/tokenize_rt-6.2.0-py2.py3-none-any.whl", hash = "sha256:a152bf4f249c847a66497a4a95f63376ed68ac6abf092a2f7cfb29d044ecff44", size = 6004, upload-time = "2025-05-23T23:47:58.812Z" },
 ]
 
 [[package]]

@@ -15,7 +15,7 @@ format-ex:
     cd elixir && mix format
 
 format-py:
-    find python/src -type f -name '*.py' | xargs uv run --project python pyupgrade --py313-plus
+    uv run --project python ruff check --fix python
     uv run --project python ruff format python
 
 lint: lint-py
