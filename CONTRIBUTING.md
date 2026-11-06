@@ -73,7 +73,7 @@ This project uses [`just`](https://github.com/casey/just) as its task runner. Ru
 | `format-ex` | Formats Elixir code |
 | `format-py` | Upgrades Python syntax to 3.13 and formats it |
 | `lint` | Lints the Python code (Elixir has no lint recipe) |
-| `lint-py` | Lints the Python code |
+| `lint-py` | Lints and type-checks the Python code |
 | `test` | Runs tests for both stacks |
 | `test-ex` | Runs Elixir tests |
 | `test-py` | Runs Python tests |
