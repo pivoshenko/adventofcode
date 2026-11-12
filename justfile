@@ -24,6 +24,11 @@ lint-py:
     cd python && uv run ruff check .
     cd python && uv run ty check .
 
+audit: audit-py
+
+audit-py:
+    cd python && uv audit --preview-features audit-command
+
 test: test-ex test-py
 
 test-ex:
